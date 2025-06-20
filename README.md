@@ -15,6 +15,8 @@ Use the prompts below to execute tasks in AI development environments.
 
 Each setup can be undo/redo using the $step variable.
 Also $commands are reusable for future reference.
+
+**🌐 Live Demo:** https://i2-i-ai-tasks-main-git-main-rahulideas2its-projects.vercel.app/
 ---
 
 # 🔧 Commands
@@ -57,3 +59,9 @@ Set up a Main App (React) from scratch:
 6. Commit with proper message
 7. Push to the main branch
 8. Connect Vercel and deploy
+
+## 🚀 $setup-deployment
+
+1. Install Vercel CLI
+2. Configure vercel.json
+3. Add deployment flow

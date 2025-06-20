@@ -21,23 +21,31 @@ Also $commands are reusable for future reference.
 
 # 🔧 Commands
 
-## 📤 $command-git-push
+<details>
+<summary>📤 $command-git-push</summary>
 
 1. Commit with proper message
 2. Push commits to main branch
 3. Deploy to vercel
 
-## 🚀 $command-run-app
+</details>
+
+<details>
+<summary>🚀 $command-run-app</summary>
 
 1. Navigate to project root directory
+2. Run development server using npm run dev
+3. Open browser to localhost:5173
+4. View the running application
+
+</details>
 
 ---
 
 # ⚙️ Setup
 
-## 📦 $setup-turborepo
-
-Set up a Turborepo monorepo from scratch:
+<details>
+<summary>📦 $setup-turborepo</summary>
 
 1. Create a new Turborepo setup without using create-turbo-app command
 2. Build monorepo structure from scratch with empty apps and packages directories
@@ -47,9 +55,10 @@ Set up a Turborepo monorepo from scratch:
 6. Add gitignore file
 7. Add prettier.json with global approved format
 
-## ⚛️ $setup-main-app
+</details>
 
-Set up a Main App (React) from scratch:
+<details>
+<summary>⚛️ $setup-main-app</summary>
 
 1. Build a new React application named "main" inside the ./apps directory
 2. Use Vite configuration with minimal dependencies
@@ -60,8 +69,13 @@ Set up a Main App (React) from scratch:
 7. Push to the main branch
 8. Connect Vercel and deploy
 
-## 🚀 $setup-deployment
+</details>
+
+<details>
+<summary>🚀 $setup-deployment</summary>
 
 1. Install Vercel CLI
 2. Configure vercel.json
 3. Add deployment flow
+
+</details>

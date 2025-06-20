@@ -36,3 +36,4 @@ Set up a Turborepo monorepo from scratch:
 5. Update gitignore
 6. Commit with proper message
 7. Push to the main branch
+8. Connect Vercel and deploy

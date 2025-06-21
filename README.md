@@ -62,7 +62,7 @@ Also $commands are reusable for future reference.
 
 1. Build a new React application named "main" inside the ./apps directory
 2. Use Vite configuration with minimal dependencies
-3. Create using TypeScript and Tailwind CSS
+3. Create using TypeScript
 4. Install dependencies and build application
 5. Update gitignore
 6. Commit with proper message
@@ -77,5 +77,95 @@ Also $commands are reusable for future reference.
 1. Install Vercel CLI
 2. Configure vercel.json
 3. Add deployment flow
+
+</details>
+
+<details>
+<summary>🏠 $setup-home-page</summary>
+
+1. Setup MUI React for main app with @mui/material, @emotion/react, @emotion/styled
+2. Install MUI icons with @mui/icons-material and @mui/system dependencies
+3. Create MUI container with maxWidth xl for responsive layout
+4. Add navbar inside container with mood-based logo on left side (Good: 🤖PILOT, Evil: 🥷HIJACK)
+5. Add mood switcher on navbar right with Good (😊) and Evil (😈) icons with tooltips
+6. Show sticky navbar immediately on scroll start with glassmorphic backdrop blur effect
+7. Link mood switcher to control both theme mode (light/dark) and primary colors
+8. Good mode: light theme with blue primary color (#1976d2)
+9. Evil mode: dark theme with red primary color (#d32f2f)
+10. Add centered banner under navbar with typewriting effect for mood-based headers
+11. Good mode header: "Your Friendly Neighborhood AI" with "Neighborhood" in primary color
+12. Evil mode header: "Your Overqualified Replacement" with "Replacement" in primary color
+13. Add blinking cursor animation with primary color
+14. Good mode caption: "Helping you code, write, and thrive — no world domination today."
+15. Evil mode caption: "Relax... I'll take it from here (and maybe your job too)."
+16. Create floating emoji effects with bubble light animations based on selected mood
+17. Good mode emojis: smiling, laughing, dancing (😊, 😂, 💃, 🎉, ✨, 🌈, 😍, 🥳)
+18. Evil mode emojis: evil, dark, blood themed (😈, 💀, 🩸, 🔥, ⚡, 🗡️, 🧿, 👿)
+19. Add radial gradient bubble effects with backdrop blur and borders
+20. Implement 8 different floating animations with rotation and translation
+21. Set banner text z-index higher than floating emojis for proper layering
+22. Add blur effect to emojis when they overlap with header text area
+23. Enhance visual appeal with varied emoji opacity levels (15%, 20%, 35%) and blur effects
+24. Add mobile responsiveness with more emojis (8 on mobile, 16 on desktop)
+25. Position emojis around banner container in staggered layout to avoid content overlap
+26. Add padding to banner text container for better spacing between text and emojis
+27. Add MUI contained Button under banner caption with capitalized text (Good: "Explore the helpful side", Evil: "Dare to see the other side")
+28. Implement automatic section fitting on scroll with smooth transitions
+29. Add scroll detection to snap to nearest section automatically
+30. Remove separate dark/light theme switcher and integrate with mood switcher
+31. Add responsive typography sizing for mobile and desktop devices
+32. Set banner section to full viewport height (100vh) with vertical centering using flex alignItems
+33. Make banner container height 100vh with flex display for proper vertical alignment
+34. Create conversation section with left-aligned single column layout using flex
+35. Position chat card on left side of conversation section
+36. Remove right column placeholder content
+37. Add client, developer, and AI conversation messages with emojis
+38. Highlight active AI mode message based on current theme
+
+</details>
+
+<details>
+<summary>🔧 $refactor-components</summary>
+
+1. Create components directory structure with ui subdirectory
+2. Extract AILogo component with isEvil and primaryColor props
+3. Create reusable Button component extending MUI Button with custom styling
+4. Create custom MoodSwitch component with emoji icons inside switch thumb
+5. Style MoodSwitch with compact size (48x26px), blue/red track colors, and smooth animation
+6. Extract Banner component with floating emojis, typewriter text, and scroll button
+7. Create ChatSection component with WhatsApp-style chat interface
+8. Create pages directory and HomePage component combining Banner and ChatSection
+9. Update App.tsx to use new component structure and remove inline components
+10. Pass theme colors and state props to all components for consistency
+
+</details>
+
+<details>
+<summary>💬 $setup-whatsapp-chat</summary>
+
+1. Create conversation section with card-based chat interface
+2. Set grid layout with vertical centering using alignItems: 'center' for entire section
+3. Create compact chat container with responsive width (90% mobile, 450px desktop, max 500px)
+4. Style with rounded corners (20px), border, reduced padding (p: 3), and box shadow
+5. Add maxHeight constraint (80vh) to prevent section overflow
+5. Add chat header with "Project Chat" title only (remove online status)
+6. Create auto-height messages container without scroll for better content visibility
+7. Add message input area at bottom with text field and send button
+8. Style input with grey background, rounded corners, and placeholder text
+9. Add circular send button with primary color and arrow icon (➤)
+10. Group client and developer messages in messages container
+11. Style client and developer messages with grey background and incoming border radius
+12. Position AI message with right alignment using flex-end justification
+8. Create conditional AI message rendering based on isEvil state
+9. Good mode: Show only 🤖 AI message with "Relax. I've optimized that already." ✨
+10. Evil mode: Show only 🥷 AI message with threatening response about job replacement
+11. Style AI messages with primary color background, white text, and outgoing border radius
+10. Add message bubbles with proper padding, borders, and maximum width (70%)
+11. Use Typography caption for sender names and body2 for message content
+12. Implement proper spacing between messages (mb: 3) for chat flow
+13. Add emoji avatars in sender names with color coding (primary, info)
+14. Add slide-in animations for conversation messages (slideInLeft for client/devs, slideInRight for AI)
+15. Implement staggered animation timing (0.6s, 0.8s, 1s) for sequential message appearance
+16. Create responsive tablet-shaped chat layout that displays all content without scrolling
 
 </details>

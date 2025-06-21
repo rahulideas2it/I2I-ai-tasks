@@ -8,7 +8,7 @@ interface BannerProps {
 }
 
 export const Banner = ({ isEvil, displayText, primaryColor }: BannerProps) => (
-  <Box sx={{ height: 'calc(100vh - 64px)', display: 'flex', alignItems: 'center' }}>
+  <Box sx={{ height: 'calc(100vh - 64px)', minHeight: '500px', display: 'flex', alignItems: 'center' }}>
     <Container maxWidth="xl">
       <Box sx={{ 
         display: 'flex', 
@@ -50,7 +50,7 @@ export const Banner = ({ isEvil, displayText, primaryColor }: BannerProps) => (
           </Box>
         )
       })}
-      <Box sx={{ position: 'relative', zIndex: 10, px: 8, py: 6 }}>
+      <Box sx={{ position: 'relative', zIndex: 10, px: { xs: 4, md: 8 }, py: { xs: 4, md: 6 } }}>
         <Typography 
           variant="h2" 
           component="h1" 

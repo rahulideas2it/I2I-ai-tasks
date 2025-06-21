@@ -5,7 +5,7 @@ import { HomePage } from './pages/HomePage'
 import { MoodSwitch } from './components/ui/MoodSwitch'
 
 function App(): JSX.Element {
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(true)
   const [displayText, setDisplayText] = useState('')
   const [isEvil, setIsEvil] = useState(false)
   const fullText = isEvil ? "Your Overqualified Replacement" : "Your Friendly Neighborhood AI"
@@ -25,9 +25,7 @@ function App(): JSX.Element {
   
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0)
-      
-      // Auto-fit scroll removed for better manual control
+      setIsScrolled(window.scrollY > 50)
     }
     
     window.addEventListener('scroll', handleScroll)
@@ -79,7 +77,7 @@ function App(): JSX.Element {
         
         {/* Main Navbar */}
         <Container maxWidth="xl">
-          <AppBar position="static" elevation={0} sx={{ bgcolor: 'transparent' }}>
+          <AppBar position="static" elevation={0} sx={{ bgcolor: 'transparent', py: 1 }}>
             <Toolbar sx={{ px: 0 }}>
               <Box sx={{ flexGrow: 1 }}>
                 <AILogo isEvil={isEvil} primaryColor={theme.palette.primary.main} />

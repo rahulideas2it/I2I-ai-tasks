@@ -88,7 +88,7 @@ Also $commands are reusable for future reference.
 3. Create MUI container with maxWidth xl for responsive layout
 4. Add navbar inside container with mood-based logo on left side (Good: 🤖PILOT, Evil: 🥷HIJACK)
 5. Add mood switcher on navbar right with Good (😊) and Evil (😈) icons with tooltips
-6. Show sticky navbar immediately on scroll start with glassmorphic backdrop blur effect
+6. Fix sticky navbar to show on page refresh by setting initial isScrolled state to true
 7. Link mood switcher to control both theme mode (light/dark) and primary colors
 8. Good mode: light theme with blue primary color (#1976d2)
 9. Evil mode: dark theme with red primary color (#d32f2f)
@@ -114,8 +114,8 @@ Also $commands are reusable for future reference.
 29. Add scroll detection to snap to nearest section automatically
 30. Remove separate dark/light theme switcher and integrate with mood switcher
 31. Add responsive typography sizing for mobile and desktop devices
-32. Set banner section to full viewport height (100vh) with vertical centering using flex alignItems
-33. Make banner container height 100vh with flex display for proper vertical alignment
+32. Set banner section to full viewport height with minHeight 500px to prevent mobile collapse
+33. Add responsive padding (xs: 4, md: 8) for better mobile display and proper vertical alignment
 34. Create conversation section with left-aligned single column layout using flex
 35. Position chat card on left side of conversation section
 36. Remove right column placeholder content
@@ -141,31 +141,51 @@ Also $commands are reusable for future reference.
 </details>
 
 <details>
+<summary>🤖 $setup-ai-prompt</summary>
+
+1. Create grid layout with 2 columns (chat left, prompts right) for desktop view
+2. Add responsive grid that shows only chat on mobile, both columns on desktop
+3. Create right grid section with mood-based header ("Magical Prompts" / "Evil Prompts")
+4. Style prompts section with matching card design (background, border, padding)
+5. Add scrollable container (75vh height) for prompt content overflow
+6. Display setup commands as organized list with titles and descriptions
+7. Include all major setup prompts: turborepo, main-app, home-page, refactor-components, whatsapp-chat
+8. Style command titles with bold typography and primary color accents
+9. Add descriptive text for each command with secondary color and smaller font size
+10. Ensure prompts section is hidden on mobile (xs) and visible on desktop (md+)
+
+</details>
+
+<details>
 <summary>💬 $setup-whatsapp-chat</summary>
 
-1. Create conversation section with card-based chat interface
-2. Set grid layout with vertical centering using alignItems: 'center' for entire section
-3. Create compact chat container with responsive width (90% mobile, 450px desktop, max 500px)
-4. Style with rounded corners (20px), border, reduced padding (p: 3), and box shadow
-5. Add maxHeight constraint (80vh) to prevent section overflow
-5. Add chat header with "Project Chat" title only (remove online status)
-6. Create auto-height messages container without scroll for better content visibility
-7. Add message input area at bottom with text field and send button
-8. Style input with grey background, rounded corners, and placeholder text
-9. Add circular send button with primary color and arrow icon (➤)
-10. Group client and developer messages in messages container
-11. Style client and developer messages with grey background and incoming border radius
-12. Position AI message with right alignment using flex-end justification
-8. Create conditional AI message rendering based on isEvil state
-9. Good mode: Show only 🤖 AI message with "Relax. I've optimized that already." ✨
-10. Evil mode: Show only 🥷 AI message with threatening response about job replacement
-11. Style AI messages with primary color background, white text, and outgoing border radius
-10. Add message bubbles with proper padding, borders, and maximum width (70%)
-11. Use Typography caption for sender names and body2 for message content
-12. Implement proper spacing between messages (mb: 3) for chat flow
-13. Add emoji avatars in sender names with color coding (primary, info)
-14. Add slide-in animations for conversation messages (slideInLeft for client/devs, slideInRight for AI)
-15. Implement staggered animation timing (0.6s, 0.8s, 1s) for sequential message appearance
-16. Create responsive tablet-shaped chat layout that displays all content without scrolling
+1. Create conversation section with WhatsApp-style card-based chat interface
+2. Set full viewport height layout with vertical centering using alignItems: 'center'
+3. Create compact chat container with responsive dimensions (100% mobile, 400px desktop, max 450px)
+4. Style chat card with clean background, rounded corners (16px), and no shadow for modern flat design
+5. Add maxHeight constraint (70vh) and center card horizontally using justifyContent: 'center'
+6. Remove "Project Chat" header section completely for cleaner, minimalist interface
+7. Create flexible messages container with reduced font sizes (0.8rem for message text)
+8. Remove message input area entirely for streamlined conversation display
+9. Group client and developer messages in upper section with left alignment
+10. Style client message with business emoji (🧑‍💼) and primary color sender name
+11. Style developer message with coding emoji (👨‍💻) and info color sender name
+12. Style client/dev messages with light grey background (grey.50) and natural conversation appearance
+13. Improve message spacing with responsive margins (mb: 3, mb: 4) for better visual hierarchy
+13. Position AI message in lower section with right alignment using flex-end justification
+14. Create conditional AI message rendering based on current mood state
+15. Good mode: Display 🤖 AI message with "Relax. I've optimized that already." ✨
+16. Evil mode: Display 🥷 AI message with "Too slow, mortals. I did it in an hour..." 😈
+17. Style AI messages with primary color background and white text
+18. Improve message typography with normal font weight (400) and better line height (1.5)
+18. Add proper message bubble padding, borders, and maximum width constraints
+19. Use Typography caption variant for sender names and body2 for message content
+20. Implement slide-in animations (slideInLeft for client/devs, slideInRight for AI)
+21. Apply staggered animation timing (0.6s, 0.8s, 1s) for sequential message appearance
+22. Apply enhanced box shadow and backdrop filter for modern glassmorphic appearance
+24. Set responsive maximum width (90% mobile, 80% desktop) for message bubbles
+25. Use responsive padding and font sizes (xs: smaller, sm: larger) for better mobile experience
+26. Remove borders and shadows for cleaner, modern appearance
+27. Ensure responsive layout with proper spacing and alignment across all devices
 
 </details>

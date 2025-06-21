@@ -5,7 +5,7 @@ interface MoodSwitchProps {
   onChange: () => void
 }
 
-const CustomSwitch = styled(Switch)(({ theme, checked }) => ({
+const CustomSwitch = styled(Switch)(() => ({
   width: 48,
   height: 26,
   padding: 0,

@@ -1,5 +1,4 @@
 import { Container, Box, Typography } from '@mui/material'
-import { AILogo } from './AILogo'
 import { Button } from './ui/Button'
 
 interface BannerProps {

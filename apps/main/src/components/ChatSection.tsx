@@ -2,10 +2,9 @@ import { Container, Box, Typography } from '@mui/material'
 
 interface ChatSectionProps {
   isEvil: boolean
-  primaryColor: string
 }
 
-export const ChatSection = ({ isEvil, primaryColor }: ChatSectionProps) => (
+export const ChatSection = ({ isEvil }: ChatSectionProps) => (
   <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
     <Container maxWidth="xl">
       <Box sx={{ 

@@ -10,6 +10,6 @@ interface HomePageProps {
 export const HomePage = ({ isEvil, displayText, primaryColor }: HomePageProps) => (
   <>
     <Banner isEvil={isEvil} displayText={displayText} primaryColor={primaryColor} />
-    <ChatSection isEvil={isEvil} primaryColor={primaryColor} />
+    <ChatSection isEvil={isEvil} />
   </>
 )

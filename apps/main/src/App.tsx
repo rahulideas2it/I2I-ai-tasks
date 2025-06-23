@@ -1,7 +1,9 @@
 import { Container, AppBar, Toolbar, Box, createTheme, ThemeProvider } from '@mui/material'
 import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AILogo } from './components/AILogo'
 import { HomePage } from './pages/HomePage'
+import { TaskPage } from './pages/TaskPage'
 import { MoodSwitch } from './components/ui/MoodSwitch'
 
 function App(): JSX.Element {
@@ -51,47 +53,60 @@ function App(): JSX.Element {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
-        {/* Sticky Navbar */}
-        {isScrolled && (
-          <AppBar 
-            position="fixed" 
-            sx={{ 
-              bgcolor: isEvil ? 'rgba(18, 18, 18, 0.8)' : 'rgba(255, 255, 255, 0.8)',
-              backdropFilter: 'blur(10px)',
-              borderBottom: 1,
-              borderColor: 'divider',
-              boxShadow: 'none'
-            }}
-          >
-            <Container maxWidth="xl">
-              <Toolbar>
-                <Box sx={{ flexGrow: 1 }}>
-                  <AILogo isEvil={isEvil} primaryColor={theme.palette.primary.main} />
-                </Box>
-                <MoodSwitch checked={isEvil} onChange={toggleMood} />
-              </Toolbar>
-            </Container>
-          </AppBar>
-        )}
-        
-        {/* Main Navbar */}
-        <Container maxWidth="xl">
-          <AppBar position="static" elevation={0} sx={{ bgcolor: 'transparent', py: 1 }}>
-            <Toolbar sx={{ px: 0 }}>
-              <Box sx={{ flexGrow: 1 }}>
-                <AILogo isEvil={isEvil} primaryColor={theme.palette.primary.main} />
-              </Box>
-              <MoodSwitch checked={isEvil} onChange={toggleMood} />
-            </Toolbar>
-          </AppBar>
-        </Container>
-        
-        <HomePage 
-          isEvil={isEvil} 
-          displayText={displayText} 
-          primaryColor={theme.palette.primary.main}
-        />
+      <Router>
+        <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
+          <Routes>
+            <Route path="/task/*" element={null} />
+            <Route path="/*" element={
+              <>
+                {/* Sticky Navbar */}
+                {isScrolled && (
+                  <AppBar 
+                    position="fixed" 
+                    sx={{ 
+                      bgcolor: isEvil ? 'rgba(18, 18, 18, 0.8)' : 'rgba(255, 255, 255, 0.8)',
+                      backdropFilter: 'blur(10px)',
+                      borderBottom: 1,
+                      borderColor: 'divider',
+                      boxShadow: 'none'
+                    }}
+                  >
+                    <Container maxWidth="xl">
+                      <Toolbar>
+                        <Box sx={{ flexGrow: 1 }}>
+                          <AILogo isEvil={isEvil} primaryColor={theme.palette.primary.main} />
+                        </Box>
+                        <MoodSwitch checked={isEvil} onChange={toggleMood} />
+                      </Toolbar>
+                    </Container>
+                  </AppBar>
+                )}
+                
+                {/* Main Navbar */}
+                <Container maxWidth="xl">
+                  <AppBar position="static" elevation={0} sx={{ bgcolor: 'transparent', py: 1 }}>
+                    <Toolbar sx={{ px: 0 }}>
+                      <Box sx={{ flexGrow: 1 }}>
+                        <AILogo isEvil={isEvil} primaryColor={theme.palette.primary.main} />
+                      </Box>
+                      <MoodSwitch checked={isEvil} onChange={toggleMood} />
+                    </Toolbar>
+                  </AppBar>
+                </Container>
+              </>
+            } />
+          </Routes>
+          
+          <Routes>
+            <Route path="/" element={
+              <HomePage 
+                isEvil={isEvil} 
+                displayText={displayText} 
+                primaryColor={theme.palette.primary.main}
+              />
+            } />
+            <Route path="/task/:taskId" element={<TaskPage isEvil={isEvil} />} />
+          </Routes>
         
         <style>
           {`
@@ -150,7 +165,8 @@ function App(): JSX.Element {
             }
           `}
         </style>
-      </Box>
+        </Box>
+      </Router>
     </ThemeProvider>
   )
 }

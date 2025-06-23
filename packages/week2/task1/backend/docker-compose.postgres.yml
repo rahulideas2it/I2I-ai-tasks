@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: notes-postgres
+    environment:
+      POSTGRES_DB: notes_app
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  pgweb:
+    image: sosedoff/pgweb
+    container_name: notes-pgweb
+    ports:
+      - "8080:8081"
+    environment:
+      PGWEB_DATABASE_URL: postgres://postgres:password@postgres:5432/notes_app?sslmode=disable
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

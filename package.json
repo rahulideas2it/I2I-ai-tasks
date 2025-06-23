@@ -3,15 +3,25 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/week2/task1/*",
+    "packages/week2/task3/legacy-app",
+    "packages/week2/task3/modern-app",
+    "packages/week3/task1"
   ],
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "test": "turbo test"
+    "test": "turbo test",
+    "dev:main": "cd apps/main && npm run dev",
+    "dev:task1-backend": "cd packages/week2/task1/backend && npm run dev",
+    "dev:task1-frontend": "cd packages/week2/task1/frontend && npm run dev",
+    "dev:task3-legacy": "cd packages/week2/task3/legacy-app && npm start",
+    "dev:task3-modern": "cd packages/week2/task3/modern-app && npm run dev",
+    "dev:week3-task1": "cd packages/week3/task1 && npm run dev"
   },
   "devDependencies": {
+    "concurrently": "^9.2.0",
     "turbo": "^2.0.0"
   },
   "packageManager": "npm@10.0.0",

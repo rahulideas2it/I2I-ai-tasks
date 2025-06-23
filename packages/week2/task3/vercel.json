@@ -1,0 +1,17 @@
+{
+  "builds": [
+    {
+      "src": "modern-app/package.json",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["modern-app/**"]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/modern-app/dist/server.js"
+    }
+  ]
+}

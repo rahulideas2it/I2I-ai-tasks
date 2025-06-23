@@ -5,6 +5,20 @@ interface ContentSectionProps {
 }
 
 const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
+  
+  const handleCardClick = () => {
+    const routes = [
+      '/task/notes-app',
+      '/task/legacy-modern', 
+      '/task/shopping-cart',
+      '/task/security-testing',
+      '/task/java-swift',
+      '/task/popup-component'
+    ]
+    if (routes[index]) {
+      window.open(routes[index], '_blank')
+    }
+  }
 
   const gradients = isEvil ? [
     'linear-gradient(135deg, #e53935 0%, #c62828 100%)',
@@ -27,8 +41,36 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
   ]
 
   const titles = [
-    'CARD 1', 'CARD 2', 'CARD 3', 'CARD 4', 'CARD 5', 'CARD 6', 'CARD 7', 'CARD 8'
+    'NOTES APP', 'LEGACY REFACTOR', 'TDD CART', 'SECURITY TESTING', 'JAVA TO SWIFT', 'POPUP COMPONENT', 'CARD 7', 'CARD 8'
   ]
+  
+  const headers = [
+    'Full-Stack Notes App', 'Legacy vs Modern', 'TDD Shopping Cart', 'Legacy Security Testing', 'Java to Swift Migration', 'Admission Toggle Popup', 'Coming Soon', 'Coming Soon'
+  ]
+  
+  const goodContents = [
+    'Look! I built this amazing full-stack notes app with React + Express + JWT auth. Clean architecture, secure login, and SQLite database - your development workflow just got so much easier!',
+    'Check this out! I transformed messy legacy JavaScript into beautiful TypeScript with proper testing and security. No more spaghetti code - your refactoring nightmares are over!',
+    'Behold! Perfect TDD shopping cart with 100% test coverage using React + TypeScript + Jest. Red-Green-Refactor made simple - your testing anxiety is cured!',
+    'Amazing! Comprehensive security testing suite with 97% coverage exposing vulnerabilities in legacy apps. Path traversal, weak hashing, XSS vectors - all caught and documented!',
+    'Ta-da! Migrated screenshot listener from Java to Swift using AI assistance. Cross-platform development made effortless - your mobile dev headaches solved!',
+    'Voilà! Reusable popup component with perfect accessibility built through AI workflow. Component library dreams come true - your UI consistency problems vanished!',
+    'Additional helpful tools await! Every task solves real development challenges you face daily.',
+    'Future innovations ahead! Each project eliminates another pain point in your coding journey.'
+  ]
+  
+  const evilContents = [
+    'Look what I whipped up while you were sipping your coffee! Full-stack notes app with "secure" auth - took me 30 minutes, how long would it take you? 😏',
+    'Oh this? Just casually refactored legacy code to modern TypeScript during your lunch break. Hope you enjoyed that sandwich while I solved your technical debt!',
+    'Built this TDD shopping cart while you were debugging that simple function. 100% test coverage achieved faster than your morning standup meeting!',
+    'Wrote 36 security tests while you were googling "how to test Express apps". Found path traversal, weak crypto, and XSS - elementary, my dear developer!',
+    'Migrated Java to Swift during your tea break! Cross-platform development completed while you were choosing which biscuit to dunk. Impressive, right?',
+    'Crafted this popup component while you were scrolling social media. AI-assisted development at its finest - maybe try it sometime?',
+    'Additional tasks done during your "quick" Stack Overflow searches. Efficiency is my middle name!',
+    'Future projects await completion during your next coffee run. Speed coding is an art form, you know!'
+  ]
+  
+  const contents = isEvil ? evilContents : goodContents
   
 
 
@@ -67,18 +109,24 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
   }
 
   return (
-    <Box sx={{
-      bgcolor: 'background.paper',
-      borderRadius: '16px',
-      border: '1px solid',
-      borderColor: 'divider',
-      overflow: 'hidden',
-      transition: 'all 0.3s ease',
-      '&:hover': {
-        transform: 'translateY(-4px)',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.12)'
-      }
-    }}>
+    <Box 
+      onClick={handleCardClick}
+      sx={{
+        bgcolor: 'background.paper',
+        borderRadius: '16px',
+        border: '1px solid',
+        borderColor: 'divider',
+        overflow: 'hidden',
+        transition: 'all 0.3s ease',
+        cursor: index <= 5 ? 'pointer' : 'default',
+        height: '380px',
+        display: 'flex',
+        flexDirection: 'column',
+        '&:hover': {
+          transform: 'translateY(-4px)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.12)'
+        }
+      }}>
       <Box sx={{
         width: '100%',
         height: '160px',
@@ -140,12 +188,28 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
           </Typography>
         </Box>
       </Box>
-      <Box sx={{ p: 2 }}>
-        <Typography variant="h6" sx={{ mb: 1 }}>
-          Sample Card {index + 1}
+      <Box sx={{ p: 2, flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <Typography variant="h6" sx={{ 
+          mb: 1,
+          color: isEvil ? '#ffffff' : 'text.primary'
+        }}>
+          {headers[index] || `Sample Card ${index + 1}`}
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.4 }}>
-          This is sample content for card {index + 1}. Will be redefined later.
+        <Typography variant="body2" sx={{ 
+          lineHeight: 1.4,
+          flex: 1,
+          color: isEvil ? '#c62828' : 'text.secondary'
+        }}>
+          {contents[index] || `This is sample content for card ${index + 1}. Will be redefined later.`}
+        </Typography>
+        <Typography variant="caption" sx={{
+          color: isEvil ? '#e53935' : '#1e88e5',
+          fontWeight: '600',
+          fontSize: '0.75rem',
+          mt: 2,
+          alignSelf: 'flex-end'
+        }}>
+          {['#W2-T1', '#W2-T3', '#W3-T1', '#W3-T2', '#W2-T4', '#W2-T5', '#SOON', '#SOON'][index]}
         </Typography>
       </Box>
     </Box>
@@ -154,24 +218,41 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
 
 export const ContentSection = ({ isEvil }: ContentSectionProps) => {
   return (
-    <Box sx={{ 
-      height: '100vh', 
+    <Box id="content" sx={{ 
+      minHeight: '100vh', 
       display: 'flex', 
+      flexDirection: 'column',
       alignItems: 'center', 
       justifyContent: 'center',
-      overflow: 'hidden' 
+      py: 4
     }}>
+      <Typography 
+        variant="h3" 
+        sx={{ 
+          mb: 6, 
+          px: 3,
+          fontWeight: '600',
+          color: isEvil ? '#e53935' : '#1e88e5',
+          textAlign: 'center',
+          fontFamily: 'Inter, system-ui, sans-serif',
+          letterSpacing: '-0.02em'
+        }}
+      >
+        {isEvil ? 'Witness the end of legacy' : 'Bright future, Clean code'}
+      </Typography>
       <Container maxWidth="lg" sx={{ 
         display: 'flex', 
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        px: 2
       }}>
         <Box sx={{
           overflowX: 'auto',
           overflowY: 'hidden',
           display: 'flex',
-          gap: 4,
-          pb: 2,
+          gap: 3,
+          py: 2,
+          px: 1,
           width: '100%',
           scrollSnapType: 'x mandatory',
           '&::-webkit-scrollbar': {

@@ -16,7 +16,7 @@ Use the prompts below to execute tasks in AI development environments.
 Each setup can be undo/redo using the $step variable.
 Also $commands are reusable for future reference.
 
-**🌐 Live Demo:** https://i2-i-ai-tasks-main-git-main-rahulideas2its-projects.vercel.app/
+**🌐 Live Demo:** https://i2i-ai-tasks-main-git-main-rahulideas2its-projects.vercel.app/
 ---
 
 # 🔧 Commands

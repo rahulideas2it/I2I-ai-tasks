@@ -27,6 +27,14 @@
     {
       "src": "packages/week2/task3/modern-app/api/index.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "packages/sampleapi/index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "packages/week2/task3/modern-app/api/index.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [

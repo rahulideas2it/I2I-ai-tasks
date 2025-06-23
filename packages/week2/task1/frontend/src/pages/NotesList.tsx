@@ -8,12 +8,11 @@ import {
   CardContent,
   CardActions,
   Button,
-  Grid,
   Alert,
   CircularProgress,
   Fab
 } from '@mui/material'
-import { Add, Edit, Delete } from '@mui/icons-material'
+// Removed @mui/icons-material to fix build issues
 import Header from '../components/Header'
 import { notesAPI, Note } from '../services/api'
 
@@ -89,9 +88,8 @@ const NotesList = () => {
             <Typography variant="h4" sx={{ mb: 4, color: '#1e88e5', fontWeight: '600' }}>
               My Notes
             </Typography>
-            <Grid container spacing={3}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 3 }}>
               {notes.map(note => (
-                <Grid item xs={12} sm={6} md={4} key={note.id}>
                   <Card sx={{
                     height: '100%',
                     display: 'flex',
@@ -120,14 +118,12 @@ const NotesList = () => {
                       <Button 
                         component={Link} 
                         to={`/notes/${note.id}`}
-                        startIcon={<Edit />}
                         size="small"
                       >
                         Edit
                       </Button>
                       <Button 
                         onClick={() => handleDelete(note.id)}
-                        startIcon={<Delete />}
                         color="error"
                         size="small"
                       >
@@ -135,9 +131,8 @@ const NotesList = () => {
                       </Button>
                     </CardActions>
                   </Card>
-                </Grid>
               ))}
-            </Grid>
+            </Box>
           </>
         )}
         
@@ -147,7 +142,7 @@ const NotesList = () => {
           color="primary"
           sx={{ position: 'fixed', bottom: 24, right: 24 }}
         >
-          <Add />
+          +
         </Fab>
       </Container>
     </>

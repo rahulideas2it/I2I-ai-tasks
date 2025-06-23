@@ -1,7 +1,5 @@
-import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Container, Box, Typography, Button } from '@mui/material'
-import { ArrowBack } from '@mui/icons-material'
 
 interface TaskPageProps {
   isEvil: boolean
@@ -72,7 +70,7 @@ DB_FILENAME=./dev.sqlite3   # SQLite file location
   'legacy-modern': {
     title: '🏗️ Legacy vs Modern Express App',
     github: 'https://github.com/your-repo/legacy-modern',
-    demo: 'http://localhost:4002',
+    demo: 'http://localhost:4003',
     content: `This project demonstrates a legacy Node.js Express backend and its refactored modern version side by side.
 
 📁 Project Structure
@@ -258,6 +256,64 @@ The component is:
 - 🧪 Testable and validated
 - 🧼 Clean and idiomatic
 - 💡 Easily extendable for other list-based toggles`
+  },
+  'react-optimization': {
+    title: '⚡ Performance Fixes',
+    github: 'https://github.com/your-repo/react-optimization',
+    demo: 'http://localhost:3004',
+    content: `A comprehensive React performance optimization project fixing state management bugs, performance issues, and error handling in a shopping cart application.
+
+## 🐛 Challenge 1: State Management Bug Fix
+
+### Issues Identified and Fixed:
+- **Direct State Mutation** - productAlreadyInCart.quantity++
+- **Props Mutation** - product.quantity = 1
+- **Inefficient Re-renders** - Spreading same array reference
+
+### ✅ Solutions Applied:
+1. **Immutable Updates**: Using functional state updates with setProducts(prev => ...)
+2. **Props Protection**: Spread operator {...product} prevents mutation
+3. **Performance**: useCallback prevents unnecessary re-renders
+4. **Proper Array Updates**: Creating new arrays instead of mutating existing ones
+
+## 🚀 Challenge 2: Performance Optimization
+
+### Optimized Products Component
+- **Expensive Filtering**: Moved to useMemo to prevent re-computation
+- **Unnecessary Re-renders**: Added memo wrapper
+- **Missing Dependencies**: Proper dependency array in useMemo
+
+### Performance Features:
+- React.memo for component memoization
+- useMemo for expensive calculations
+- useCallback for function memoization
+- Proper dependency arrays
+- Immutable state updates
+
+## 🛡️ Challenge 3: Error Handling Enhancement
+
+### Robust API Error Handling
+- **Comprehensive Try-Catch**: All API calls wrapped
+- **Network Error Handling**: Timeout and connection errors
+- **HTTP Status Validation**: Proper status code checking
+- **User-Friendly Messages**: Clear error descriptions
+- **Retry Mechanism**: Automatic retry for failed requests
+- **Input Validation**: Data format validation
+
+## 📊 Results Achieved
+- Fixed all state mutation bugs
+- Eliminated unnecessary re-renders
+- Added comprehensive error handling
+- Improved user experience with loading states
+- Enhanced code maintainability and readability
+
+## 🛠️ Technologies Used
+- React 18 with Hooks
+- TypeScript for type safety
+- Context API for state management
+- Axios for HTTP requests
+- Jest for testing
+- Performance optimization patterns`
   }
 }
 
@@ -270,8 +326,8 @@ export const TaskPage = ({ isEvil }: TaskPageProps) => {
       <Container maxWidth="md" sx={{ py: 4 }}>
         <Typography variant="h4">Task not found</Typography>
         <Link to="/">
-          <Button startIcon={<ArrowBack />} sx={{ mt: 2 }}>
-            Back to Home
+          <Button sx={{ mt: 2 }}>
+            ← Back to Home
           </Button>
         </Link>
       </Container>
@@ -289,7 +345,6 @@ export const TaskPage = ({ isEvil }: TaskPageProps) => {
       <Container maxWidth="md">
         <Link to="/#content" style={{ textDecoration: 'none' }}>
           <Button 
-            startIcon={<ArrowBack />} 
             sx={{ 
               mb: 3,
               color: isEvil ? '#e53935' : '#1e88e5',
@@ -298,7 +353,7 @@ export const TaskPage = ({ isEvil }: TaskPageProps) => {
               }
             }}
           >
-            Back to Home
+            ← Back to Home
           </Button>
         </Link>
         

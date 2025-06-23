@@ -9,11 +9,12 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
   const handleCardClick = () => {
     const routes = [
       '/task/notes-app',
-      '/task/legacy-modern', 
+      '/task/legacy-modern',
+      '/task/java-swift',
+      '/task/popup-component',
       '/task/shopping-cart',
       '/task/security-testing',
-      '/task/java-swift',
-      '/task/popup-component'
+      '/task/react-optimization'
     ]
     if (routes[index]) {
       window.open(routes[index], '_blank')
@@ -41,33 +42,31 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
   ]
 
   const titles = [
-    'NOTES APP', 'LEGACY REFACTOR', 'TDD CART', 'SECURITY TESTING', 'JAVA TO SWIFT', 'POPUP COMPONENT', 'CARD 7', 'CARD 8'
+    'NOTES APP', 'LEGACY REFACTOR', 'JAVA TO SWIFT', 'POPUP COMPONENT', 'TDD CART', 'SECURITY TESTING', 'PERFORMANCE FIXES'
   ]
   
   const headers = [
-    'Full-Stack Notes App', 'Legacy vs Modern', 'TDD Shopping Cart', 'Legacy Security Testing', 'Java to Swift Migration', 'Admission Toggle Popup', 'Coming Soon', 'Coming Soon'
+    'Full-Stack Notes App', 'Legacy vs Modern', 'Java to Swift Migration', 'Admission Toggle Popup', 'TDD Shopping Cart', 'Legacy Security Testing', 'Performance Fixes'
   ]
   
   const goodContents = [
     'Look! I built this amazing full-stack notes app with React + Express + JWT auth. Clean architecture, secure login, and SQLite database - your development workflow just got so much easier!',
     'Check this out! I transformed messy legacy JavaScript into beautiful TypeScript with proper testing and security. No more spaghetti code - your refactoring nightmares are over!',
-    'Behold! Perfect TDD shopping cart with 100% test coverage using React + TypeScript + Jest. Red-Green-Refactor made simple - your testing anxiety is cured!',
-    'Amazing! Comprehensive security testing suite with 97% coverage exposing vulnerabilities in legacy apps. Path traversal, weak hashing, XSS vectors - all caught and documented!',
     'Ta-da! Migrated screenshot listener from Java to Swift using AI assistance. Cross-platform development made effortless - your mobile dev headaches solved!',
     'Voilà! Reusable popup component with perfect accessibility built through AI workflow. Component library dreams come true - your UI consistency problems vanished!',
-    'Additional helpful tools await! Every task solves real development challenges you face daily.',
-    'Future innovations ahead! Each project eliminates another pain point in your coding journey.'
+    'Behold! Perfect TDD shopping cart with 100% test coverage using React + TypeScript + Jest. Red-Green-Refactor made simple - your testing anxiety is cured!',
+    'Amazing! Comprehensive security testing suite with 97% coverage exposing vulnerabilities in legacy apps. Path traversal, weak hashing, XSS vectors - all caught and documented!',
+    'Fantastic! Fixed state mutations, performance issues, and error handling in React shopping cart. useMemo, useCallback, proper immutability - optimization mastery achieved!'
   ]
   
   const evilContents = [
     'Look what I whipped up while you were sipping your coffee! Full-stack notes app with "secure" auth - took me 30 minutes, how long would it take you? 😏',
     'Oh this? Just casually refactored legacy code to modern TypeScript during your lunch break. Hope you enjoyed that sandwich while I solved your technical debt!',
-    'Built this TDD shopping cart while you were debugging that simple function. 100% test coverage achieved faster than your morning standup meeting!',
-    'Wrote 36 security tests while you were googling "how to test Express apps". Found path traversal, weak crypto, and XSS - elementary, my dear developer!',
     'Migrated Java to Swift during your tea break! Cross-platform development completed while you were choosing which biscuit to dunk. Impressive, right?',
     'Crafted this popup component while you were scrolling social media. AI-assisted development at its finest - maybe try it sometime?',
-    'Additional tasks done during your "quick" Stack Overflow searches. Efficiency is my middle name!',
-    'Future projects await completion during your next coffee run. Speed coding is an art form, you know!'
+    'Built this TDD shopping cart while you were debugging that simple function. 100% test coverage achieved faster than your morning standup meeting!',
+    'Wrote 36 security tests while you were googling "how to test Express apps". Found path traversal, weak crypto, and XSS - elementary, my dear developer!',
+    'Fixed React performance bugs while you were arguing about useState vs useReducer on Twitter. State mutations, memo, useMemo - child\'s play really!'
   ]
   
   const contents = isEvil ? evilContents : goodContents
@@ -118,7 +117,7 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
         borderColor: 'divider',
         overflow: 'hidden',
         transition: 'all 0.3s ease',
-        cursor: index <= 5 ? 'pointer' : 'default',
+        cursor: index <= 6 ? 'pointer' : 'default',
         height: '380px',
         display: 'flex',
         flexDirection: 'column',
@@ -209,7 +208,7 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
           mt: 2,
           alignSelf: 'flex-end'
         }}>
-          {['#W2-T1', '#W2-T3', '#W3-T1', '#W3-T2', '#W2-T4', '#W2-T5', '#SOON', '#SOON'][index]}
+          {['#W2-T1', '#W2-T3', '#W2-T4', '#W2-T5', '#W3-T1', '#W3-T2', '#W5-T1'][index]}
         </Typography>
       </Box>
     </Box>
@@ -267,7 +266,7 @@ export const ContentSection = ({ isEvil }: ContentSectionProps) => {
             borderRadius: '4px'
           }
         }}>
-          {Array.from({ length: 9 }, (_, index) => (
+          {Array.from({ length: 7 }, (_, index) => (
             <Box key={index} sx={{ 
               width: '260px', 
               maxWidth: '260px', 

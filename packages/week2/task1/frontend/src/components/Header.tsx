@@ -7,7 +7,7 @@ import {
   Box,
   Container
 } from '@mui/material'
-import { Note, Add, Logout } from '@mui/icons-material'
+// Removed @mui/icons-material to fix build issues
 import { useAuth } from '../context/AuthContext'
 
 const Header = () => {
@@ -26,7 +26,6 @@ const Header = () => {
       <Container maxWidth="xl">
         <Toolbar sx={{ px: 0 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
-            <Note sx={{ color: '#1e88e5', mr: 1 }} />
             <Typography 
               variant="h6" 
               sx={{ 
@@ -35,7 +34,7 @@ const Header = () => {
                 fontFamily: 'Inter, system-ui, sans-serif'
               }}
             >
-              Notes App
+              📝 Notes App
             </Typography>
           </Box>
           
@@ -43,7 +42,6 @@ const Header = () => {
             <Button 
               component={Link} 
               to="/"
-              startIcon={<Note />}
               sx={{ color: 'text.primary' }}
             >
               My Notes
@@ -52,10 +50,9 @@ const Header = () => {
               component={Link} 
               to="/notes/new"
               variant="contained"
-              startIcon={<Add />}
               sx={{ borderRadius: '8px' }}
             >
-              New Note
+              + New Note
             </Button>
             <Typography 
               variant="body2" 
@@ -68,7 +65,6 @@ const Header = () => {
             </Typography>
             <Button 
               onClick={logout}
-              startIcon={<Logout />}
               color="error"
               sx={{ borderRadius: '8px' }}
             >

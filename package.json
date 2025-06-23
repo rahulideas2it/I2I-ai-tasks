@@ -6,7 +6,8 @@
     "packages/week2/task1/*",
     "packages/week2/task3/legacy-app",
     "packages/week2/task3/modern-app",
-    "packages/week3/task1"
+    "packages/week3/task1",
+    "packages/week5/task"
   ],
   "scripts": {
     "build": "turbo build",
@@ -17,8 +18,16 @@
     "dev:task1-backend": "cd packages/week2/task1/backend && npm run dev",
     "dev:task1-frontend": "cd packages/week2/task1/frontend && npm run dev",
     "dev:task3-legacy": "cd packages/week2/task3/legacy-app && npm start",
-    "dev:task3-modern": "cd packages/week2/task3/modern-app && npm run dev",
-    "dev:week3-task1": "cd packages/week3/task1 && npm run dev"
+    "dev:task3-modern": "cd packages/week2/task3/modern-app && set PORT=4002 && npm run dev",
+    "dev:week3-task1": "cd packages/week3/task1 && npm run dev",
+    "dev:week5-task": "cd packages/week5/task && set PORT=3004 && npm start",
+    "build:main": "cd apps/main && npm run build",
+    "build:task1-backend": "cd packages/week2/task1/backend && npm run build",
+    "build:task1-frontend": "cd packages/week2/task1/frontend && npm run build",
+    "build:task3-modern": "cd packages/week2/task3/modern-app && npm run build",
+    "build:week3-task1": "cd packages/week3/task1 && npm run build",
+    "build:week5-task": "cd packages/week5/task && npm run build",
+    "build:all": "npm run build:main && npm run build:task1-backend && npm run build:task1-frontend && npm run build:task3-modern && npm run build:week3-task1 && npm run build:week5-task"
   },
   "devDependencies": {
     "concurrently": "^9.2.0",

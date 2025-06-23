@@ -7,10 +7,9 @@ import {
   TextField,
   Button,
   Typography,
-  Alert,
-  CircularProgress
+  Alert
 } from '@mui/material'
-import { Save, Cancel } from '@mui/icons-material'
+// Removed @mui/icons-material to fix build issues
 import Header from '../components/Header'
 import { notesAPI } from '../services/api'
 
@@ -130,7 +129,6 @@ const NoteEditor = () => {
               <Button 
                 type="submit" 
                 variant="contained"
-                startIcon={loading ? <CircularProgress size={20} /> : <Save />}
                 disabled={loading}
                 sx={{ 
                   borderRadius: '8px',
@@ -142,7 +140,6 @@ const NoteEditor = () => {
               </Button>
               <Button 
                 variant="outlined"
-                startIcon={<Cancel />}
                 onClick={() => navigate('/')}
                 sx={{ 
                   borderRadius: '8px',

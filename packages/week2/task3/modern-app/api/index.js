@@ -33,18 +33,18 @@ app.get('/api', (req, res) => {
   });
 });
 
-app.get('/api/health', (req, res) => {
+app.get('/health', (req, res) => {
   res.json({ status: 'healthy', timestamp: new Date().toISOString() });
 });
 
-app.get('/api/users', (req, res) => {
+app.get('/users', (req, res) => {
   res.json([
     { id: 1, name: 'John Doe', email: 'john@example.com' },
     { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
   ]);
 });
 
-app.post('/api/users', (req, res) => {
+app.post('/users', (req, res) => {
   const { name, email } = req.body;
   res.json({ 
     id: Date.now(), 
@@ -55,7 +55,7 @@ app.post('/api/users', (req, res) => {
 });
 
 // Auth routes for notes app
-app.post('/api/auth/login', (req, res) => {
+app.post('/auth/login', (req, res) => {
   const { email, password } = req.body;
   if (email && password) {
     res.json({ 
@@ -67,7 +67,7 @@ app.post('/api/auth/login', (req, res) => {
   }
 });
 
-app.post('/api/auth/register', (req, res) => {
+app.post('/auth/register', (req, res) => {
   const { email, password, name } = req.body;
   if (email && password) {
     res.json({ 
@@ -80,14 +80,14 @@ app.post('/api/auth/register', (req, res) => {
 });
 
 // Notes routes
-app.get('/api/notes', (req, res) => {
+app.get('/notes', (req, res) => {
   res.json([
     { id: 1, title: 'Demo Note 1', content: 'This is a demo note', createdAt: new Date().toISOString() },
     { id: 2, title: 'Demo Note 2', content: 'Another demo note', createdAt: new Date().toISOString() }
   ]);
 });
 
-app.post('/api/notes', (req, res) => {
+app.post('/notes', (req, res) => {
   const { title, content } = req.body;
   res.json({ 
     id: Date.now(), 

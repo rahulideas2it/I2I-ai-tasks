@@ -25,20 +25,15 @@
       "use": "@vercel/node"
     }
   ],
-  "rewrites": [
-    { "source": "/", "destination": "/apps/main" },
-    { "source": "/main", "destination": "/apps/main" },
-    { "source": "/main/(.*)", "destination": "/apps/main/$1" },
-    
-    { "source": "/notes", "destination": "/packages/week2/task1/frontend" },
-    { "source": "/notes/(.*)", "destination": "/packages/week2/task1/frontend/$1" },
-    
-    { "source": "/shopping-cart", "destination": "/packages/week3/task1" },
-    { "source": "/shopping-cart/(.*)", "destination": "/packages/week3/task1/$1" },
-    
-    { "source": "/performance-fixes", "destination": "/packages/week5/task" },
-    { "source": "/performance-fixes/(.*)", "destination": "/packages/week5/task/$1" },
-    
-    { "source": "/api/(.*)", "destination": "/packages/week2/task3/modern-app/$1" }
+  "routes": [
+    { "src": "/assets/(.*)", "dest": "/apps/main/assets/$1" },
+    { "src": "/notes", "dest": "/packages/week2/task1/frontend/index.html" },
+    { "src": "/notes/(.*)", "dest": "/packages/week2/task1/frontend/$1" },
+    { "src": "/shopping-cart", "dest": "/packages/week3/task1/index.html" },
+    { "src": "/shopping-cart/(.*)", "dest": "/packages/week3/task1/$1" },
+    { "src": "/performance-fixes", "dest": "/packages/week5/task/index.html" },
+    { "src": "/performance-fixes/(.*)", "dest": "/packages/week5/task/$1" },
+    { "src": "/api/(.*)", "dest": "/packages/week2/task3/modern-app/$1" },
+    { "src": "/(.*)", "dest": "/apps/main/$1" }
   ]
 }

@@ -7,7 +7,8 @@
     "start": "tsc && node dist/server.js",
     "dev": "ts-node-dev --respawn src/server.ts",
     "test": "jest",
-    "build": "echo 'Build completed - Express backend ready'"
+    "build": "tsc",
+    "vercel-build": "npm run build"
   },
   "author": "Your Name",
   "license": "MIT",

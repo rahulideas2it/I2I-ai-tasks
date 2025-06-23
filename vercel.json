@@ -27,8 +27,9 @@
   ],
   "routes": [
     { "src": "/notes/assets/(.*)", "dest": "/packages/week2/task1/frontend/assets/$1" },
+    { "src": "/notes/(.*\\.(js|css|png|jpg|jpeg|gif|svg|ico))", "dest": "/packages/week2/task1/frontend/$1" },
+    { "src": "/notes/(.*)", "dest": "/packages/week2/task1/frontend/index.html" },
     { "src": "/notes", "dest": "/packages/week2/task1/frontend/index.html" },
-    { "src": "/notes/(.*)", "dest": "/packages/week2/task1/frontend/$1" },
     
     { "src": "/shopping-cart/assets/(.*)", "dest": "/packages/week3/task1/assets/$1" },
     { "src": "/shopping-cart", "dest": "/packages/week3/task1/index.html" },

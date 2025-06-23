@@ -8,7 +8,12 @@ export default defineConfig({
     port: 3001
   },
   build: {
-    assetsDir: 'assets'
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
   },
   build: {
     rollupOptions: {

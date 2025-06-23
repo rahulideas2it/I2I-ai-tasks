@@ -1,4 +1,3 @@
-const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const url = require('url');
@@ -56,6 +55,7 @@ module.exports = async (req, res) => {
           'POST /notesapi/auth/signup',
           'POST /notesapi/auth/login',
           'GET /notesapi/notes',
+          'GET /notesapi/notes/:id',
           'POST /notesapi/notes',
           'PUT /notesapi/notes/:id',
           'DELETE /notesapi/notes/:id'
@@ -109,6 +109,17 @@ module.exports = async (req, res) => {
     if (!user) return res.end(JSON.stringify({ error: 'Unauthorized' }));
     const userNotes = notes.filter(n => n.user_id === user.id);
     return res.end(JSON.stringify(userNotes));
+  }
+
+  if (method === 'GET' && pathname.startsWith('/notes/')) {
+    const user = authenticateToken();
+    if (!user) return res.end(JSON.stringify({ error: 'Unauthorized' }));
+
+    const noteId = parseInt(pathname.split('/')[2]);
+    const note = notes.find(n => n.id === noteId && n.user_id === user.id);
+
+    if (!note) return res.end(JSON.stringify({ error: 'Note not found' }));
+    return res.end(JSON.stringify(note));
   }
 
   if (method === 'POST' && pathname === '/notes') {

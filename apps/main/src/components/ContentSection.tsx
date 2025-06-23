@@ -9,8 +9,8 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
   const handleCardClick = () => {
     const routes = [
       '/task/notes-app',
-      '/task/legacy-modern',
       '/task/strategy-pattern',
+      '/task/legacy-modern',
       '/task/java-swift-conversion',
       '/task/popup-component-task',
       '/task/shopping-cart',
@@ -45,17 +45,17 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
   ]
 
   const titles = [
-    'NOTES APP', 'LEGACY REFACTOR', 'STRATEGY PATTERN', 'JAVA TO SWIFT', 'POPUP COMPONENT', 'TDD CART', 'SECURITY TESTING', 'EDGE CASES', 'GILDED ROSE', 'PERFORMANCE FIXES'
+    'NOTES APP', 'STRATEGY PATTERN', 'LEGACY REFACTOR', 'JAVA TO SWIFT', 'POPUP COMPONENT', 'TDD CART', 'SECURITY TESTING', 'EDGE CASES', 'GILDED ROSE', 'PERFORMANCE FIXES'
   ]
   
   const headers = [
-    'Full-Stack Notes App', 'Legacy vs Modern', 'Strategy Pattern', 'Java to Swift Migration', 'Admission Toggle Popup', 'TDD Shopping Cart', 'Legacy Security Testing', 'Edge Case Discovery', 'Gilded Rose Kata', 'Performance Fixes'
+    'Full-Stack Notes App', 'Strategy Pattern', 'Legacy vs Modern', 'Java to Swift Migration', 'Admission Toggle Popup', 'TDD Shopping Cart', 'Legacy Security Testing', 'Edge Case Discovery', 'Gilded Rose Kata', 'Performance Fixes'
   ]
   
   const goodContents = [
     'Look! I built this amazing full-stack notes app with React + Express + JWT auth. Clean architecture, secure login, and SQLite database - your development workflow just got so much easier!',
-    'Check this out! I transformed messy legacy JavaScript into beautiful TypeScript with proper testing and security. No more spaghetti code - your refactoring nightmares are over!',
     'Wonderful! Implemented Strategy Pattern for money withdrawals with TypeScript. Clean SOLID principles, testable design - your architecture problems solved elegantly!',
+    'Check this out! I transformed messy legacy JavaScript into beautiful TypeScript with proper testing and security. No more spaghetti code - your refactoring nightmares are over!',
     'Ta-da! Migrated screenshot listener from Java to Swift using AI assistance. Cross-platform development made effortless - your mobile dev headaches solved!',
     'Voilà! Reusable popup component with perfect accessibility built through AI workflow. Component library dreams come true - your UI consistency problems vanished!',
     'Behold! Perfect TDD shopping cart with 100% test coverage using React + TypeScript + Jest. Red-Green-Refactor made simple - your testing anxiety is cured!',
@@ -67,8 +67,8 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
   
   const evilContents = [
     'Look what I whipped up while you were sipping your coffee! Full-stack notes app with "secure" auth - took me 30 minutes, how long would it take you? 😏',
-    'Oh this? Just casually refactored legacy code to modern TypeScript during your lunch break. Hope you enjoyed that sandwich while I solved your technical debt!',
     'Implemented Strategy Pattern while you were googling "what is SOLID principles". Banking withdrawal logic with perfect abstraction - basic computer science, really!',
+    'Oh this? Just casually refactored legacy code to modern TypeScript during your lunch break. Hope you enjoyed that sandwich while I solved your technical debt!',
     'Migrated Java to Swift during your tea break! Cross-platform development completed while you were choosing which biscuit to dunk. Impressive, right?',
     'Crafted this popup component while you were scrolling social media. AI-assisted development at its finest - maybe try it sometime?',
     'Built this TDD shopping cart while you were debugging that simple function. 100% test coverage achieved faster than your morning standup meeting!',
@@ -217,7 +217,7 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
           mt: 2,
           alignSelf: 'flex-end'
         }}>
-          {['#W2-T1', '#W2-T3', '#W2-T2', '#W2-T4', '#W2-T5', '#W3-T1', '#W3-T2', '#W3-T3', '#W4-T1', '#W5-T1'][index]}
+          {['#W2-T1', '#W2-T2', '#W2-T3', '#W2-T4', '#W2-T5', '#W3-T1', '#W3-T2', '#W3-T3', '#W4-T1', '#W5-T1'][index]}
         </Typography>
       </Box>
     </Box>

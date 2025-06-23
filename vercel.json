@@ -21,11 +21,7 @@
       "config": { "distDir": "build" }
     },
     {
-      "src": "packages/week2/task3/modern-app/package.json",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "packages/week2/task3/modern-app/package.json",
+      "src": "packages/week2/task3/modern-app/api/index.js",
       "use": "@vercel/node"
     }
   ],
@@ -42,9 +38,7 @@
     { "src": "/performance-fixes", "dest": "/packages/week5/task/index.html" },
     { "src": "/performance-fixes/(.*)", "dest": "/packages/week5/task/$1" },
     
-    { "src": "/api/(.*)", "dest": "/packages/week2/task3/modern-app/$1" },
-    
-    { "src": "/api/(.*)", "dest": "/packages/week2/task3/modern-app/$1" },
+    { "src": "/api/(.*)", "dest": "/packages/week2/task3/modern-app/api/index.js" },
     
     { "src": "/assets/(.*)", "dest": "/apps/main/assets/$1" },
     { "src": "/task/(.*)", "dest": "/apps/main/index.html" },

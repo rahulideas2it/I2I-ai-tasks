@@ -1,44 +1,30 @@
-const express = require('express');
-const cors = require('cors');
+module.exports = (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Content-Type', 'application/json');
 
-const app = express();
+  // Strip the "/modernapi" prefix
+  let url = req.url.replace(/^\/modernapi/, '') || '/';
+  const { method } = req;
 
-app.use(cors());
-app.use(express.json());
+  if (method === 'GET' && url === '/') {
+    return res.json({
+      message: 'Modern API Root',
+      status: 'running',
+      endpoints: ['GET /modernapi', 'GET /modernapi/health', 'GET /modernapi/users']
+    });
+  }
 
-// Simple API routes for demo
-app.get('/', (req, res) => {
-  res.json({ 
-    message: 'Legacy vs Modern Express API Demo',
-    status: 'running',
-    endpoints: [
-      'GET /modernApi - This endpoint',
-      'GET /modernApi/health - Health check',
-      'POST /modernApi/users - Create user (demo)',
-      'GET /modernApi/users - List users (demo)'
-    ]
-  });
-});
+  if (method === 'GET' && url === '/health') {
+    return res.json({ status: 'healthy', timestamp: new Date().toISOString() });
+  }
 
-app.get('/health', (req, res) => {
-  res.json({ status: 'healthy', timestamp: new Date().toISOString() });
-});
+  if (method === 'GET' && url === '/users') {
+    return res.json([
+      { id: 1, name: 'John Doe', email: 'john@example.com' },
+      { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
+    ]);
+  }
 
-app.get('/users', (req, res) => {
-  res.json([
-    { id: 1, name: 'John Doe', email: 'john@example.com' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
-  ]);
-});
-
-app.post('/users', (req, res) => {
-  const { name, email } = req.body;
-  res.json({ 
-    id: Date.now(), 
-    name: name || 'Demo User', 
-    email: email || 'demo@example.com',
-    created: new Date().toISOString()
-  });
-});
-
-module.exports = app;
+  res.statusCode = 404;
+  return res.end(JSON.stringify({ error: 'Not found', path: url }));
+};

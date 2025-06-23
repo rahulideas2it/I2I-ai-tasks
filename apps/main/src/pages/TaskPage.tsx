@@ -71,7 +71,7 @@ DB_FILENAME=./dev.sqlite3   # SQLite file location
   'legacy-modern': {
     title: '🏗️ Legacy vs Modern Express App',
     github: 'https://github.com/rahulideas2it/I2I-ai-tasks/tree/main/packages/week2/task3',
-    demo: 'https://i2-i-ai-tasks-main.vercel.app/modernApi',
+    demo: 'https://i2-i-ai-tasks-main.vercel.app/modernapi',
 
     content: `This project demonstrates a legacy Node.js Express backend and its refactored modern version side by side.
 

@@ -31,7 +31,7 @@ const Login = () => {
 
     try {
       const response = await authAPI.login(email, password)
-      login(response.data.data.token, response.data.data.user)
+      login(response.data.token, { id: response.data.user.id.toString(), email: response.data.user.email })
     } catch (err: any) {
       setError(err.response?.data?.message || 'Login failed')
     } finally {

@@ -27,14 +27,11 @@ export interface Note {
 }
 
 export interface AuthResponse {
-  success: boolean
   message: string
-  data: {
-    token: string
-    user: {
-      id: string
-      email: string
-    }
+  token: string
+  user: {
+    id: number
+    email: string
   }
 }
 
@@ -47,17 +44,17 @@ export const authAPI = {
 }
 
 export const notesAPI = {
-  getAll: () => api.get<{ success: boolean; data: Note[] }>('/notes'),
+  getAll: () => api.get<Note[]>('/notes'),
   
-  getById: (id: string) => api.get<{ success: boolean; data: Note }>(`/notes/${id}`),
+  getById: (id: string) => api.get<Note>(`/notes/${id}`),
   
   create: (title: string, content: string) =>
-    api.post<{ success: boolean; data: Note }>('/notes', { title, content }),
+    api.post<Note>('/notes', { title, content }),
   
   update: (id: string, title: string, content: string) =>
-    api.put<{ success: boolean; data: Note }>(`/notes/${id}`, { title, content }),
+    api.put<Note>(`/notes/${id}`, { title, content }),
   
-  delete: (id: string) => api.delete<{ success: boolean; message: string }>(`/notes/${id}`),
+  delete: (id: string) => api.delete<{ message: string }>(`/notes/${id}`),
 }
 
 export default api

@@ -28,7 +28,7 @@ const NotesList = () => {
   const fetchNotes = async () => {
     try {
       const response = await notesAPI.getAll()
-      setNotes(response.data.data)
+      setNotes(response.data)
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to fetch notes')
     } finally {

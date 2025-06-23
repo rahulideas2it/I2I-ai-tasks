@@ -7,6 +7,19 @@ app.use(cors());
 app.use(express.json());
 
 // Simple API routes for demo
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Legacy vs Modern Express API Demo',
+    status: 'running',
+    endpoints: [
+      'GET /api - This endpoint',
+      'GET /api/health - Health check',
+      'POST /api/users - Create user (demo)',
+      'GET /api/users - List users (demo)'
+    ]
+  });
+});
+
 app.get('/api', (req, res) => {
   res.json({ 
     message: 'Legacy vs Modern Express API Demo',

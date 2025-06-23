@@ -36,8 +36,8 @@ const NoteEditor = () => {
     setLoading(true)
     try {
       const response = await notesAPI.getById(id)
-      setTitle(response.data.data.title)
-      setContent(response.data.data.content)
+      setTitle(response.data.title)
+      setContent(response.data.content)
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to fetch note')
     } finally {

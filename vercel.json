@@ -21,7 +21,7 @@
       "config": { "distDir": "build" }
     },
     {
-      "src": "packages/week2/task1/backend/package.json",
+      "src": "packages/week2/task1/backend/api/index.js",
       "use": "@vercel/node"
     }
   ],
@@ -39,7 +39,8 @@
     { "src": "/performance-fixes", "dest": "/packages/week5/task/index.html" },
     { "src": "/performance-fixes/(.*)", "dest": "/packages/week5/task/$1" },
     
-    { "src": "/api/(.*)", "dest": "/packages/week2/task1/backend/$1" },
+    { "src": "/api/(.*)", "dest": "/packages/week2/task1/backend/api/index.js" },
+    { "src": "/api", "dest": "/packages/week2/task1/backend/api/index.js" },
     
     { "src": "/assets/(.*)", "dest": "/apps/main/assets/$1" },
     { "src": "/task/(.*)", "dest": "/apps/main/index.html" },

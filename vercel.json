@@ -23,6 +23,10 @@
     {
       "src": "packages/week2/task3/modern-app/package.json",
       "use": "@vercel/node"
+    },
+    {
+      "src": "packages/week2/task3/modern-app/package.json",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -37,6 +41,8 @@
     { "src": "/performance-fixes/static/(.*)", "dest": "/packages/week5/task/static/$1" },
     { "src": "/performance-fixes", "dest": "/packages/week5/task/index.html" },
     { "src": "/performance-fixes/(.*)", "dest": "/packages/week5/task/$1" },
+    
+    { "src": "/api/(.*)", "dest": "/packages/week2/task3/modern-app/$1" },
     
     { "src": "/api/(.*)", "dest": "/packages/week2/task3/modern-app/$1" },
     

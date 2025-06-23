@@ -1,6 +1,0 @@
-{
-  "buildCommand": "npm run build:main",
-  "outputDirectory": "apps/main/dist",
-  "installCommand": "npm install",
-  "devCommand": "npm run dev:main"
-}

@@ -1,14 +1,11 @@
-const express = require('express');
-const serverless = require('serverless-http');
-
-const app = express();
-
-app.get('/', (req, res) => {
+module.exports = (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Content-Type', 'application/json');
+  
   res.json({ 
     message: 'Sample API Working!',
     timestamp: new Date().toISOString(),
-    path: req.path
+    method: req.method,
+    url: req.url
   });
-});
-
-module.exports = serverless(app);
+};

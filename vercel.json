@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "apps/main/package.json",
@@ -6,12 +7,41 @@
       "config": {
         "distDir": "dist"
       }
+    },
+    {
+      "src": "packages/week2/task1/frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    },
+    {
+      "src": "packages/week2/task3/modern-app/package.json",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "packages/week3/task1/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    },
+    {
+      "src": "packages/week5/task/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
     }
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/packages/week2/task3/modern-app/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/apps/main/dist/$1"
+      "dest": "/apps/main/$1"
     }
   ]
 }

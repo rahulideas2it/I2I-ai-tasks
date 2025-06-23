@@ -1,0 +1,44 @@
+{
+  "builds": [
+    {
+      "src": "apps/main/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    },
+    {
+      "src": "packages/week2/task1/frontend/package.json", 
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    },
+    {
+      "src": "packages/week3/task1/package.json",
+      "use": "@vercel/static-build", 
+      "config": { "distDir": "dist" }
+    },
+    {
+      "src": "packages/week5/task/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "build" }
+    },
+    {
+      "src": "packages/week2/task3/modern-app/package.json",
+      "use": "@vercel/node"
+    }
+  ],
+  "rewrites": [
+    { "source": "/", "destination": "/apps/main" },
+    { "source": "/main", "destination": "/apps/main" },
+    { "source": "/main/(.*)", "destination": "/apps/main/$1" },
+    
+    { "source": "/notes", "destination": "/packages/week2/task1/frontend" },
+    { "source": "/notes/(.*)", "destination": "/packages/week2/task1/frontend/$1" },
+    
+    { "source": "/shopping-cart", "destination": "/packages/week3/task1" },
+    { "source": "/shopping-cart/(.*)", "destination": "/packages/week3/task1/$1" },
+    
+    { "source": "/performance-fixes", "destination": "/packages/week5/task" },
+    { "source": "/performance-fixes/(.*)", "destination": "/packages/week5/task/$1" },
+    
+    { "source": "/api/(.*)", "destination": "/packages/week2/task3/modern-app/$1" }
+  ]
+}

@@ -9,7 +9,8 @@ const taskContent: Record<string, { title: string; content: string; github?: str
   'notes-app': {
     title: '📝 Full-Stack Notes Application',
     github: 'https://github.com/your-repo/notes-app',
-    demo: 'http://localhost:3001',
+    demo: 'https://i2-i-ai-tasks-main.vercel.app/notes',
+
     content: `A complete note-taking application with React frontend, Express backend, JWT authentication, and SQLite database.
 
 ## Features
@@ -70,7 +71,8 @@ DB_FILENAME=./dev.sqlite3   # SQLite file location
   'legacy-modern': {
     title: '🏗️ Legacy vs Modern Express App',
     github: 'https://github.com/your-repo/legacy-modern',
-    demo: 'http://localhost:4003',
+    demo: 'https://i2-i-ai-tasks-main.vercel.app/api',
+
     content: `This project demonstrates a legacy Node.js Express backend and its refactored modern version side by side.
 
 📁 Project Structure
@@ -130,7 +132,8 @@ The screenshot listener logic was fully migrated from Java to Swift using AI-ass
   'shopping-cart': {
     title: '🛒 TDD Shopping Cart Application',
     github: 'https://github.com/your-repo/shopping-cart',
-    demo: 'http://localhost:3002',
+    demo: 'https://i2-i-ai-tasks-main.vercel.app/shopping-cart',
+
     content: `A modern Shopping Cart built with React, Vite, TypeScript, and Jest using the Test-Driven Development (TDD) approach.
 
 ## Tech Stack
@@ -260,7 +263,8 @@ The component is:
   'react-optimization': {
     title: '⚡ Performance Fixes',
     github: 'https://github.com/your-repo/react-optimization',
-    demo: 'http://localhost:3004',
+    demo: 'https://i2-i-ai-tasks-main.vercel.app/performance-fixes',
+
     content: `A comprehensive React performance optimization project fixing state management bugs, performance issues, and error handling in a shopping cart application.
 
 ## 🐛 Challenge 1: State Management Bug Fix

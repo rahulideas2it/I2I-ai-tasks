@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AILogo } from './components/AILogo'
 import { HomePage } from './pages/HomePage'
 import { TaskPage } from './pages/TaskPage'
+import { DemoPage } from './pages/DemoPage'
 import { MoodSwitch } from './components/ui/MoodSwitch'
 
 function App(): JSX.Element {
@@ -106,6 +107,7 @@ function App(): JSX.Element {
               />
             } />
             <Route path="/task/:taskId" element={<TaskPage isEvil={isEvil} />} />
+            <Route path="/demo/:demoId" element={<DemoPage />} />
           </Routes>
         
         <style>

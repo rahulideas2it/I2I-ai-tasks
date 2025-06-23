@@ -355,7 +355,7 @@ tests/
 - Follows SOLID principles
 - Unit tested using Jest`
   },
-  'java-swift': {
+  'java-swift-conversion': {
     title: '📸 Screenshot Listener — Java to Swift Conversion',
     github: 'https://github.com/rahulideas2it/I2I-ai-tasks/tree/main/packages/week2/task4',
 
@@ -383,7 +383,7 @@ Convert a screenshot listener from Java (Android) to Swift (iOS) using AI assist
 ## ✅ Result
 The screenshot listener logic was fully migrated from Java to Swift using AI-assisted translation. Manual testing confirms correct observer behavior on iOS, with no memory leaks or crashes.`
   },
-  'popup-component': {
+  'popup-component-task': {
     title: '🧩 Admission Toggle Popup Component',
     github: 'https://github.com/rahulideas2it/I2I-ai-tasks/tree/main/packages/week2/task5',
 
@@ -408,7 +408,7 @@ The component is:
 - 🧼 Clean and idiomatic
 - 💡 Easily extendable for other list-based toggles`
   },
-  'security-testing': {
+  'security-testing-suite': {
     title: '🔒 Legacy App Security Testing Suite',
     github: 'https://github.com/rahulideas2it/I2I-ai-tasks/tree/main/packages/week3/task2',
 

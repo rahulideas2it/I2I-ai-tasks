@@ -12,23 +12,10 @@ app.get('/', (req, res) => {
     message: 'Legacy vs Modern Express API Demo',
     status: 'running',
     endpoints: [
-      'GET /api - This endpoint',
-      'GET /api/health - Health check',
-      'POST /api/users - Create user (demo)',
-      'GET /api/users - List users (demo)'
-    ]
-  });
-});
-
-app.get('/api', (req, res) => {
-  res.json({ 
-    message: 'Legacy vs Modern Express API Demo',
-    status: 'running',
-    endpoints: [
-      'GET /api - This endpoint',
-      'GET /api/health - Health check',
-      'POST /api/users - Create user (demo)',
-      'GET /api/users - List users (demo)'
+      'GET /modernApi - This endpoint',
+      'GET /modernApi/health - Health check',
+      'POST /modernApi/users - Create user (demo)',
+      'GET /modernApi/users - List users (demo)'
     ]
   });
 });
@@ -51,49 +38,6 @@ app.post('/users', (req, res) => {
     name: name || 'Demo User', 
     email: email || 'demo@example.com',
     created: new Date().toISOString()
-  });
-});
-
-// Auth routes for notes app
-app.post('/auth/login', (req, res) => {
-  const { email, password } = req.body;
-  if (email && password) {
-    res.json({ 
-      token: 'demo-jwt-token-' + Date.now(),
-      user: { id: 1, email, name: 'Demo User' }
-    });
-  } else {
-    res.status(400).json({ error: 'Email and password required' });
-  }
-});
-
-app.post('/auth/register', (req, res) => {
-  const { email, password, name } = req.body;
-  if (email && password) {
-    res.json({ 
-      token: 'demo-jwt-token-' + Date.now(),
-      user: { id: Date.now(), email, name: name || 'New User' }
-    });
-  } else {
-    res.status(400).json({ error: 'Email and password required' });
-  }
-});
-
-// Notes routes
-app.get('/notes', (req, res) => {
-  res.json([
-    { id: 1, title: 'Demo Note 1', content: 'This is a demo note', createdAt: new Date().toISOString() },
-    { id: 2, title: 'Demo Note 2', content: 'Another demo note', createdAt: new Date().toISOString() }
-  ]);
-});
-
-app.post('/notes', (req, res) => {
-  const { title, content } = req.body;
-  res.json({ 
-    id: Date.now(), 
-    title: title || 'New Note',
-    content: content || 'Note content',
-    createdAt: new Date().toISOString()
   });
 });
 

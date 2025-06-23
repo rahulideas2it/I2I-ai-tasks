@@ -170,12 +170,12 @@ app.get('/', (req, res) => {
   res.json({ 
     message: 'Notes API is running',
     endpoints: [
-      'POST /api/auth/signup',
-      'POST /api/auth/login', 
-      'GET /api/notes',
-      'POST /api/notes',
-      'PUT /api/notes/:id',
-      'DELETE /api/notes/:id'
+      'POST /notesapi/auth/signup',
+      'POST /notesapi/auth/login', 
+      'GET /notesapi/notes',
+      'POST /notesapi/notes',
+      'PUT /notesapi/notes/:id',
+      'DELETE /notesapi/notes/:id'
     ]
   });
 });

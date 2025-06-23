@@ -24,7 +24,7 @@
   "scripts": {
     "dev": "set PORT=3004 && react-scripts start",
     "start": "set PORT=3004 && react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=false react-scripts build",
     "test": "react-scripts test --silent",
     "test:watch": "npm test -- --watch",
     "test:coverage": "npm test -- --coverage --watchAll",

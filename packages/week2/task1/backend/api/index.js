@@ -78,7 +78,7 @@ module.exports = async (req, res) => {
         id: Date.now(),
         email,
         password: hashedPassword,
-        createdAt: new Date().toISOString()
+        created_at: new Date().toISOString()
       };
       users.push(user);
 
@@ -107,7 +107,7 @@ module.exports = async (req, res) => {
   if (method === 'GET' && pathname === '/notes') {
     const user = authenticateToken();
     if (!user) return res.end(JSON.stringify({ error: 'Unauthorized' }));
-    const userNotes = notes.filter(n => n.userId === user.id);
+    const userNotes = notes.filter(n => n.user_id === user.id);
     return res.end(JSON.stringify(userNotes));
   }
 
@@ -120,11 +120,11 @@ module.exports = async (req, res) => {
 
     const note = {
       id: Date.now(),
-      userId: user.id,
+      user_id: user.id,
       title,
       content,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
     };
     notes.push(note);
     return res.end(JSON.stringify(note));
@@ -134,7 +134,7 @@ module.exports = async (req, res) => {
     const user = authenticateToken();
     if (!user) return res.end(JSON.stringify({ error: 'Unauthorized' }));
     const noteId = parseInt(pathname.split('/')[2]);
-    const index = notes.findIndex(n => n.id === noteId && n.userId === user.id);
+    const index = notes.findIndex(n => n.id === noteId && n.user_id === user.id);
     if (index === -1) return res.end(JSON.stringify({ error: 'Note not found' }));
 
     const { title, content } = await getBody();
@@ -142,7 +142,7 @@ module.exports = async (req, res) => {
       ...notes[index],
       title: title || notes[index].title,
       content: content || notes[index].content,
-      updatedAt: new Date().toISOString()
+      updated_at: new Date().toISOString()
     };
     return res.end(JSON.stringify(notes[index]));
   }
@@ -151,7 +151,7 @@ module.exports = async (req, res) => {
     const user = authenticateToken();
     if (!user) return res.end(JSON.stringify({ error: 'Unauthorized' }));
     const noteId = parseInt(pathname.split('/')[2]);
-    const index = notes.findIndex(n => n.id === noteId && n.userId === user.id);
+    const index = notes.findIndex(n => n.id === noteId && n.user_id === user.id);
     if (index === -1) return res.end(JSON.stringify({ error: 'Note not found' }));
     notes.splice(index, 1);
     return res.end(JSON.stringify({ message: 'Note deleted successfully' }));

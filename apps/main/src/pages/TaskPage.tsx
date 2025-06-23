@@ -616,19 +616,24 @@ export const TaskPage = ({ isEvil }: TaskPageProps) => {
         </Link>
         
         <Box sx={{
-          backgroundColor: isEvil ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.9)',
-          borderRadius: '16px',
-          p: 4,
-          boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
-          backdropFilter: 'blur(10px)'
+          backgroundColor: isEvil ? 'rgba(0,0,0,0.85)' : 'rgba(255,255,255,0.95)',
+          borderRadius: '20px',
+          p: { xs: 3, sm: 4, md: 5 },
+          boxShadow: isEvil ? '0 12px 40px rgba(229,57,53,0.2)' : '0 12px 40px rgba(30,136,229,0.15)',
+          backdropFilter: 'blur(20px)',
+          border: `1px solid ${isEvil ? 'rgba(229,57,53,0.2)' : 'rgba(30,136,229,0.1)'}`,
+          maxWidth: '900px',
+          mx: 'auto'
         }}>
           <Typography 
-            variant="h3" 
+            variant="h2" 
             sx={{ 
-              mb: 3,
+              mb: 4,
               color: isEvil ? '#e53935' : '#1e88e5',
-              fontWeight: '600',
-              fontFamily: 'Inter, system-ui, sans-serif'
+              fontWeight: '700',
+              fontFamily: 'Inter, system-ui, sans-serif',
+              fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.5rem' },
+              lineHeight: 1.2
             }}
           >
             {task.title}
@@ -659,17 +664,79 @@ export const TaskPage = ({ isEvil }: TaskPageProps) => {
             </Box>
           )}
           
-          <Typography 
-            variant="body1" 
-            sx={{ 
-              whiteSpace: 'pre-line',
-              lineHeight: 1.8,
-              color: isEvil ? '#ffffff' : '#333333',
-              fontFamily: 'Inter, system-ui, sans-serif'
-            }}
-          >
-            {task.content}
-          </Typography>
+          <Box sx={{ 
+            '& h1, & h2, & h3, & h4, & h5, & h6': {
+              color: isEvil ? '#e53935' : '#1e88e5',
+              fontWeight: '600',
+              fontFamily: 'Inter, system-ui, sans-serif',
+              mt: 3,
+              mb: 2,
+              lineHeight: 1.3
+            },
+            '& h2': { fontSize: '1.5rem' },
+            '& h3': { fontSize: '1.25rem' },
+            '& p': {
+              color: isEvil ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.8)',
+              lineHeight: 1.7,
+              mb: 2,
+              fontSize: '1rem'
+            },
+            '& ul, & ol': {
+              color: isEvil ? 'rgba(255,255,255,0.85)' : 'rgba(0,0,0,0.75)',
+              pl: 3,
+              mb: 2
+            },
+            '& li': {
+              mb: 0.5,
+              lineHeight: 1.6
+            },
+            '& code': {
+              bgcolor: isEvil ? 'rgba(229,57,53,0.1)' : 'rgba(30,136,229,0.1)',
+              color: isEvil ? '#e53935' : '#1e88e5',
+              px: 1,
+              py: 0.5,
+              borderRadius: '4px',
+              fontSize: '0.9em',
+              fontFamily: 'Monaco, Consolas, monospace'
+            },
+            '& pre': {
+              bgcolor: isEvil ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.05)',
+              p: 2,
+              borderRadius: '8px',
+              overflow: 'auto',
+              fontSize: '0.9rem',
+              lineHeight: 1.5
+            },
+            '& strong': {
+              color: isEvil ? '#ffffff' : '#000000',
+              fontWeight: '600'
+            },
+            '& table': {
+              width: '100%',
+              borderCollapse: 'collapse',
+              mb: 2
+            },
+            '& th, & td': {
+              border: `1px solid ${isEvil ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)'}`,
+              p: 1,
+              textAlign: 'left'
+            },
+            '& th': {
+              bgcolor: isEvil ? 'rgba(229,57,53,0.1)' : 'rgba(30,136,229,0.1)',
+              fontWeight: '600'
+            }
+          }}>
+            <Typography 
+              component="div"
+              sx={{ 
+                whiteSpace: 'pre-line',
+                fontFamily: 'Inter, system-ui, sans-serif',
+                '& > *:first-of-type': { mt: 0 }
+              }}
+            >
+              {task.content}
+            </Typography>
+          </Box>
         </Box>
       </Container>
     </Box>

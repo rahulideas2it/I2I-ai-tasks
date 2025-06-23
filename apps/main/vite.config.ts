@@ -6,13 +6,12 @@ export default defineConfig({
   server: {
     port: 3000
   },
+  optimizeDeps: {
+    include: ['prop-types']
+  },
   build: {
     rollupOptions: {
-      external: ['prop-types'],
       output: {
-        globals: {
-          'prop-types': 'PropTypes'
-        },
         manualChunks: {
           vendor: ['react', 'react-dom'],
           mui: ['@mui/material']

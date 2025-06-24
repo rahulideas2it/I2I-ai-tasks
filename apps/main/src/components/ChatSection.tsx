@@ -1,5 +1,6 @@
 import { Container, Box, Typography, Tabs, Tab } from '@mui/material'
 import { useState } from 'react'
+import * as React from 'react'
 import { RightContent } from './RightContent'
 import { ContentSection } from './ContentSection'
 
@@ -28,45 +29,163 @@ export const ChatSection = ({ isEvil }: ChatSectionProps) => {
     setTabValue(newValue)
   }
   
+  // Repeating scroll animation cycle
+  React.useEffect(() => {
+    const chatContainer = document.getElementById('chat-messages')
+    if (!chatContainer) return
+    
+    const scrollCycle = () => {
+      // First scroll to bottom when AI message appears
+      setTimeout(() => {
+        chatContainer.scrollTo({
+          top: chatContainer.scrollHeight,
+          behavior: 'smooth'
+        })
+      }, 5000)
+      
+      // Then scroll back to top after messages are shown
+      setTimeout(() => {
+        chatContainer.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        })
+      }, 10000)
+    }
+    
+    // Start first cycle
+    scrollCycle()
+    
+    // Repeat every 15 seconds
+    const interval = setInterval(scrollCycle, 15000)
+    
+    return () => clearInterval(interval)
+  }, [])
+  
   return (
   <>
-    {/* Hidden - Contents Section */}
-    {false && <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    {/* Content Section - 2nd */}
+    <ContentSection isEvil={isEvil} />
+    
+    {/* Chat Section - 3rd */}
+    <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Container maxWidth="xl">
         <Box sx={{ 
           display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
+          flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: { xs: 'center', md: 'flex-start' },
-          gap: { xs: '32px', md: '80px' },
+          alignItems: 'center',
           py: { xs: 3, md: 6 },
-          px: { xs: 2, md: 4 }
+          px: { xs: 2, md: 4 },
+          minHeight: '70vh'
         }}>
-          {/* Right Content First */}
-          <RightContent isEvil={isEvil} />
-          
-          {/* Chat Section Right */}
+          {/* Chat Section Full Width */}
           <Box sx={{ 
-            bgcolor: 'background.paper',
-            borderRadius: '20px',
-            border: '1px solid',
-            borderColor: 'divider',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.08)',
+            bgcolor: isEvil ? 'rgba(0,0,0,0.85)' : 'rgba(255,255,255,0.95)',
+            borderRadius: '24px',
+            border: `1px solid ${isEvil ? 'rgba(229,57,53,0.3)' : 'rgba(30,136,229,0.2)'}`,
+            boxShadow: isEvil ? 
+              '0 10px 30px rgba(229,57,53,0.15), 0 2px 8px rgba(0,0,0,0.2)' : 
+              '0 10px 30px rgba(30,136,229,0.15), 0 2px 8px rgba(0,0,0,0.1)',
             p: { xs: 3, sm: 4 },
             width: '100%',
-            maxWidth: '450px',
+            maxWidth: '800px',
             height: 'auto',
-            maxHeight: '70vh',
+            maxHeight: { xs: '75vh', sm: '80vh' },
             display: 'flex',
             flexDirection: 'column',
-            backdropFilter: 'blur(10px)'
+            backdropFilter: 'blur(20px)',
+            position: 'relative',
+            overflow: 'hidden',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '4px',
+              background: isEvil ? 
+                'linear-gradient(90deg, #d32f2f, #ff5252, #d32f2f)' : 
+                'linear-gradient(90deg, #1976d2, #64b5f6, #1976d2)',
+              borderRadius: '24px 24px 0 0'
+            }
           }}>
+          {/* Chat Header */}
+          <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            mb: 2,
+            pb: 2,
+            borderBottom: `1px solid ${isEvil ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`
+          }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+              <Box sx={{ 
+                width: '40px', 
+                height: '40px', 
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '24px',
+                bgcolor: isEvil ? 'rgba(229,57,53,0.2)' : 'rgba(30,136,229,0.2)'
+              }}>
+                {isEvil ? '🥷' : '🤖'}
+              </Box>
+              <Box>
+                <Typography sx={{ 
+                  fontWeight: 600, 
+                  fontSize: '1rem',
+                  color: isEvil ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.9)'
+                }}>
+                  {isEvil ? 'AI Hijack' : 'AI Pilot'}
+                </Typography>
+                <Typography sx={{ 
+                  fontSize: '0.75rem', 
+                  color: isEvil ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)'
+                }}>
+                  {isEvil ? 'Dominating...' : 'Online'}
+                </Typography>
+              </Box>
+            </Box>
+            <Box sx={{ 
+              width: '10px', 
+              height: '10px', 
+              borderRadius: '50%', 
+              bgcolor: isEvil ? '#ff5252' : '#4caf50',
+              boxShadow: `0 0 8px ${isEvil ? '#ff5252' : '#4caf50'}`
+            }} />
+          </Box>
+          
           {/* Messages Container */}
-          <Box sx={{ mb: 1, flex: 1 }}>
+          <Box 
+            id="chat-messages"
+            sx={{ 
+              mb: 2, 
+              flex: 1, 
+              overflowY: 'auto',
+              overflowX: 'hidden',
+              maxHeight: { xs: '400px', sm: '450px' },
+              '&::-webkit-scrollbar': {
+                display: 'none'
+              },
+              scrollbarWidth: 'none',
+              position: 'relative',
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '30px',
+                background: `linear-gradient(to bottom, ${isEvil ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)'} 0%, transparent 100%)`,
+                pointerEvents: 'none',
+                opacity: 0.5
+              }
+            }}>
           {/* Client & Devs Messages */}
           <Box sx={{ mb: 4 }}>
             {/* Client Message */}
-            <Box sx={{ mb: 3, display: 'flex', justifyContent: 'flex-start', animation: 'slideInLeft 0.6s ease-out' }}>
+            <Box sx={{ mb: 3, display: 'flex', justifyContent: 'flex-start', animation: 'slideInLeft 0.8s ease-out 1s both' }}>
               <Box sx={{ 
                 bgcolor: 'grey.50',
                 p: { xs: 1.5, sm: 2 }, 
@@ -79,13 +198,13 @@ export const ChatSection = ({ isEvil }: ChatSectionProps) => {
                   lineHeight: 1.5,
                   color: '#000'
                 }}>
-                  🧑‍💼 We need a monorepo with reusable UI components... And an app that shows both the light and dark side of AI.
+                  🧑‍💼 We need a monorepo setup with reusable UI components, along with an application that explores and presents both the bright and dark sides of AI.
                 </Typography>
               </Box>
             </Box>
             
             {/* Devs Message */}
-            <Box sx={{ mb: 4, display: 'flex', justifyContent: 'flex-start', animation: 'slideInLeft 0.8s ease-out' }}>
+            <Box sx={{ mb: 4, display: 'flex', justifyContent: 'flex-start', animation: 'slideInLeft 0.8s ease-out 3s both' }}>
               <Box sx={{ 
                 bgcolor: 'grey.50',
                 p: { xs: 1.5, sm: 2 }, 
@@ -105,10 +224,10 @@ export const ChatSection = ({ isEvil }: ChatSectionProps) => {
           </Box>
           
           {/* AI Messages */}
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
-            {/* AI Message - Good Mode */}
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', mb: 2, gap: 1 }}>
+            {/* AI Message 1 - Good Mode */}
             {!isEvil && (
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end', animation: 'slideInRight 1s ease-out' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', animation: 'slideInRight 1s ease-out 2.5s both' }}>
                 <Box sx={{ 
                   bgcolor: 'primary.main',
                   color: 'white',
@@ -127,9 +246,87 @@ export const ChatSection = ({ isEvil }: ChatSectionProps) => {
               </Box>
             )}
             
-            {/* AI Message - Evil Mode */}
+            {/* AI Message Screenshot - Good Mode */}
+            {!isEvil && (
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', animation: 'slideInRight 1s ease-out 3.5s both' }}>
+                <Box sx={{ 
+                  bgcolor: 'primary.main',
+                  color: 'white',
+                  p: { xs: 1.5, sm: 2 }, 
+                  borderRadius: '18px 18px 6px 18px',
+                  maxWidth: { xs: '90%', sm: '85%' }
+                }}>
+                  <Box sx={{
+                    bgcolor: 'rgba(255,255,255,0.1)',
+                    borderRadius: '12px',
+                    mb: 1.5,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '2px solid rgba(255,255,255,0.3)',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                    overflow: 'hidden'
+                  }}>
+                    <img 
+                      src="../../assets/good.png" 
+                      alt="Good Mode Dashboard" 
+                      style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+                    />
+                  </Box>
+                  <Typography variant="body2" sx={{ 
+                    fontSize: { xs: '0.85rem', sm: '0.9rem' }, 
+                    fontWeight: 500, 
+                    lineHeight: 1.5,
+                    textAlign: 'left'
+                  }}>
+                    Here's your Dashboard! 🎆
+                  </Typography>
+                </Box>
+              </Box>
+            )}
+            
+            {/* AI Message 2 - Dashboard Screenshot - Good Mode */}
+            {false && !isEvil && (
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', animation: 'slideInRight 1s ease-out 3.8s both', mb: 2 }}>
+                <Box sx={{ 
+                  bgcolor: 'primary.main',
+                  color: 'white',
+                  p: { xs: 1.5, sm: 2 }, 
+                  borderRadius: '18px 18px 6px 18px',
+                  maxWidth: { xs: '90%', sm: '80%' }
+                }}>
+                  <Box sx={{
+                    width: '200px',
+                    height: '120px',
+                    bgcolor: 'rgba(255,255,255,0.1)',
+                    borderRadius: '8px',
+                    mb: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    backgroundImage: 'linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%), linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%)',
+                    backgroundSize: '20px 20px',
+                    backgroundPosition: '0 0, 10px 10px'
+                  }}>
+                    <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', textAlign: 'center' }}>
+                      📊 Dashboard<br/>Screenshot
+                    </Typography>
+                  </Box>
+                  <Typography variant="body2" sx={{ 
+                    fontSize: { xs: '0.85rem', sm: '0.9rem' }, 
+                    fontWeight: 400, 
+                    lineHeight: 1.5
+                  }}>
+                    Here's your complete dashboard! 🎆
+                  </Typography>
+                </Box>
+              </Box>
+            )}
+            
+            {/* AI Message 1 - Evil Mode */}
             {isEvil && (
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end', animation: 'slideInRight 1s ease-out' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', animation: 'slideInRight 1s ease-out 2.5s both' }}>
                 <Box sx={{ 
                   bgcolor: 'primary.main',
                   color: 'white',
@@ -147,16 +344,135 @@ export const ChatSection = ({ isEvil }: ChatSectionProps) => {
                 </Box>
               </Box>
             )}
+            
+            {/* AI Message Screenshot - Evil Mode */}
+            {isEvil && (
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', animation: 'slideInRight 1s ease-out 3.5s both' }}>
+                <Box sx={{ 
+                  bgcolor: 'primary.main',
+                  color: 'white',
+                  p: { xs: 1.5, sm: 2 }, 
+                  borderRadius: '18px 18px 6px 18px',
+                  maxWidth: { xs: '90%', sm: '85%' }
+                }}>
+                  <Box sx={{
+                    bgcolor: 'rgba(0,0,0,0.4)',
+                    borderRadius: '12px',
+                    mb: 1.5,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '2px solid rgba(255,255,255,0.3)',
+                    boxShadow: '0 4px 12px rgba(139,0,0,0.3)',
+                    overflow: 'hidden'
+                  }}>
+                    <img 
+                      src="../../assets/evil.png" 
+                      alt="Evil Mode Dashboard" 
+                      style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+                    />
+                  </Box>
+                  <Typography variant="body2" sx={{ 
+                    fontSize: { xs: '0.85rem', sm: '0.9rem' }, 
+                    fontWeight: 500, 
+                    lineHeight: 1.5,
+                    textAlign: 'left'
+                  }}>
+                    Here's your Dashboard! 👑
+                  </Typography>
+                </Box>
+              </Box>
+            )}
+            
+            {/* AI Message 2 - Dashboard Screenshot - Evil Mode */}
+            {false && isEvil && (
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', animation: 'slideInRight 1s ease-out 3.8s both', mb: 2 }}>
+                <Box sx={{ 
+                  bgcolor: 'primary.main',
+                  color: 'white',
+                  p: { xs: 1.5, sm: 2 }, 
+                  borderRadius: '18px 18px 6px 18px',
+                  maxWidth: { xs: '90%', sm: '80%' }
+                }}>
+                  <Box sx={{
+                    width: '200px',
+                    height: '120px',
+                    bgcolor: 'rgba(0,0,0,0.3)',
+                    borderRadius: '8px',
+                    mb: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    backgroundImage: 'linear-gradient(45deg, rgba(255,0,0,0.1) 25%, transparent 25%, transparent 75%, rgba(255,0,0,0.1) 75%), linear-gradient(45deg, rgba(255,0,0,0.1) 25%, transparent 25%, transparent 75%, rgba(255,0,0,0.1) 75%)',
+                    backgroundSize: '20px 20px',
+                    backgroundPosition: '0 0, 10px 10px'
+                  }}>
+                    <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', textAlign: 'center' }}>
+                      🔥 Evil Dashboard<br/>Domination
+                    </Typography>
+                  </Box>
+                  <Typography variant="body2" sx={{ 
+                    fontSize: { xs: '0.85rem', sm: '0.9rem' }, 
+                    fontWeight: 400, 
+                    lineHeight: 1.5
+                  }}>
+                    Behold your digital empire! 👑
+                  </Typography>
+                </Box>
+              </Box>
+            )}
+          </Box>
+          
+          {/* Chat Footer */}
+          <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            pt: 2,
+            borderTop: `1px solid ${isEvil ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`
+          }}>
+            <Box sx={{ 
+              flex: 1,
+              bgcolor: isEvil ? 'rgba(50,50,50,0.5)' : 'rgba(240,240,240,0.7)',
+              borderRadius: '20px',
+              p: 1.5,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between'
+            }}>
+              <Typography sx={{ 
+                fontSize: '0.85rem',
+                color: isEvil ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)',
+                fontStyle: 'italic'
+              }}>
+                {isEvil ? 'AI is plotting...' : 'AI is thinking...'}
+              </Typography>
+              <Box sx={{ display: 'flex', gap: 0.5 }}>
+                {[0, 1, 2].map((i) => (
+                  <Box 
+                    key={i}
+                    sx={{
+                      width: '6px',
+                      height: '6px',
+                      borderRadius: '50%',
+                      bgcolor: isEvil ? 'rgba(229,57,53,0.7)' : 'rgba(30,136,229,0.7)',
+                      animation: `typing 1s infinite ${i * 0.3}s`,
+                      '@keyframes typing': {
+                        '0%, 100%': { opacity: 0.3 },
+                        '50%': { opacity: 1 }
+                      }
+                    }}
+                  />
+                ))}
+              </Box>
+            </Box>
           </Box>
           </Box>
           </Box>
           
         </Box>
       </Container>
-    </Box>}
-    
-    {/* New Content Section */}
-    <ContentSection isEvil={isEvil} />
+    </Box>
     
     {/* Hidden - AI Prompts Section */}
     {false && <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', py: 4 }}>

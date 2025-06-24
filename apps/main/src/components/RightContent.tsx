@@ -16,12 +16,14 @@ export const RightContent = ({ isEvil }: RightContentProps) => {
   <Box sx={{ 
     bgcolor: 'transparent',
     width: '100%',
-    maxWidth: '450px',
-    height: '70vh',
+    maxWidth: '500px',
+    height: '80vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'relative'
+    position: 'relative',
+    order: { xs: 2, md: 1 },
+    overflow: 'hidden'
   }}>
     <Box sx={{ 
       position: 'relative', 
@@ -76,6 +78,65 @@ export const RightContent = ({ isEvil }: RightContentProps) => {
         }
       }} />
       
+      {/* Medium Circle - Top Left (Behind) */}
+      <Box sx={{
+        position: 'absolute',
+        top: '10%',
+        left: '8%',
+        width: '35px',
+        height: '35px',
+        borderRadius: '50%',
+        bgcolor: isEvil ? 'rgba(229,57,53,0.25)' : 'rgba(30,136,229,0.25)',
+        animation: 'float1 3.5s ease-in-out infinite',
+        zIndex: 0,
+        opacity: 1
+      }} />
+      
+      {/* Medium Triangle - Top Right (Behind) */}
+      <Box sx={{
+        position: 'absolute',
+        top: '15%',
+        right: '10%',
+        width: '0',
+        height: '0',
+        borderLeft: '20px solid transparent',
+        borderRight: '20px solid transparent',
+        borderBottom: `35px solid ${isEvil ? 'rgba(229,57,53,0.3)' : 'rgba(30,136,229,0.3)'}`,
+        animation: 'float2 4s ease-in-out infinite',
+        zIndex: 0,
+        opacity: 0.9
+      }} />
+      
+      {/* Large Square - Bottom Left (Behind) */}
+      <Box sx={{
+        position: 'absolute',
+        bottom: '15%',
+        left: '5%',
+        width: '60px',
+        height: '60px',
+        transform: 'rotate(45deg)',
+        bgcolor: isEvil ? 'rgba(229,57,53,0.2)' : 'rgba(30,136,229,0.2)',
+        borderRadius: '8px',
+        animation: 'float3 3.2s ease-in-out infinite',
+        zIndex: 0,
+        opacity: 0.75
+      }} />
+      
+      {/* Medium Diamond - Bottom Right (Behind) */}
+      <Box sx={{
+        position: 'absolute',
+        bottom: '10%',
+        right: '10%',
+        width: '30px',
+        height: '30px',
+        transform: 'rotate(45deg)',
+        bgcolor: isEvil ? 'rgba(229,57,53,0.25)' : 'rgba(30,136,229,0.25)',
+        borderRadius: '5px',
+        animation: 'float4 2.8s ease-in-out infinite',
+        zIndex: 0,
+        opacity: 1
+      }} />
+      
       {/* Center Robot Emoji with Click */}
       <Box 
         onClick={handleClick}
@@ -85,7 +146,7 @@ export const RightContent = ({ isEvil }: RightContentProps) => {
           left: '50%',
           transform: 'translate(-50%, -50%)',
           fontSize: '2rem',
-          zIndex: 3,
+          zIndex: 10,
           cursor: 'pointer',
           transition: 'all 0.3s ease',
           animation: 'float 3s ease-in-out infinite',
@@ -103,6 +164,28 @@ export const RightContent = ({ isEvil }: RightContentProps) => {
       >
         {isEvil ? '🥷' : '🤖'}
       </Box>
+      
+      {/* Add keyframes for all animations */}
+      <style>
+        {`
+          @keyframes float1 {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+          }
+          @keyframes float2 {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+          }
+          @keyframes float3 {
+            0%, 100% { transform: rotate(45deg) translateY(0px); }
+            50% { transform: rotate(45deg) translateY(-10px); }
+          }
+          @keyframes float4 {
+            0%, 100% { transform: rotate(45deg) translateY(0px); }
+            50% { transform: rotate(45deg) translateY(-6px); }
+          }
+        `}
+      </style>
       
 
     </Box>

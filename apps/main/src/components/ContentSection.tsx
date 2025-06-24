@@ -1,4 +1,5 @@
 import { Container, Box, Typography } from '@mui/material'
+import * as React from 'react'
 
 interface ContentSectionProps {
   isEvil: boolean
@@ -225,6 +226,57 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
 }
 
 export const ContentSection = ({ isEvil }: ContentSectionProps) => {
+  // Reference for the scrolling container
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+  
+  // Auto-scroll animation
+  React.useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+    
+    let animationId: number;
+    let scrollPosition = 0;
+    const cardWidth = 260 + 24; // card width + gap
+    const totalWidth = cardWidth * 10; // 10 cards
+    
+    const scroll = () => {
+      // Increment scroll position (adjust speed here)
+      scrollPosition += 0.5;
+      
+      // Reset when we've scrolled through all cards
+      if (scrollPosition >= totalWidth) {
+        // Smooth reset to beginning
+        scrollPosition = 0;
+        scrollContainer.scrollTo({ left: 0, behavior: 'auto' });
+      }
+      
+      // Apply the scroll position
+      scrollContainer.scrollLeft = scrollPosition;
+      
+      // Continue animation
+      animationId = requestAnimationFrame(scroll);
+    };
+    
+    // Start animation
+    animationId = requestAnimationFrame(scroll);
+    
+    // Pause animation when hovering
+    const handleMouseEnter = () => cancelAnimationFrame(animationId);
+    const handleMouseLeave = () => {
+      animationId = requestAnimationFrame(scroll);
+    };
+    
+    scrollContainer.addEventListener('mouseenter', handleMouseEnter);
+    scrollContainer.addEventListener('mouseleave', handleMouseLeave);
+    
+    // Clean up
+    return () => {
+      cancelAnimationFrame(animationId);
+      scrollContainer.removeEventListener('mouseenter', handleMouseEnter);
+      scrollContainer.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+  
   return (
     <Box id="content" sx={{ 
       minHeight: '100vh', 
@@ -254,7 +306,9 @@ export const ContentSection = ({ isEvil }: ContentSectionProps) => {
         justifyContent: 'center',
         px: 2
       }}>
-        <Box sx={{
+        <Box 
+          ref={scrollContainerRef}
+          sx={{
           overflowX: 'auto',
           overflowY: 'hidden',
           display: 'flex',
@@ -263,6 +317,7 @@ export const ContentSection = ({ isEvil }: ContentSectionProps) => {
           px: 1,
           width: '100%',
           scrollSnapType: 'x mandatory',
+          scrollBehavior: 'smooth',
           '&::-webkit-scrollbar': {
             height: '8px'
           },

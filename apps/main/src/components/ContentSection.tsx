@@ -218,7 +218,7 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
           lineHeight: { xs: 1.4, sm: 1.5 },
           fontSize: { xs: '0.85rem', sm: '0.9rem' },
           flex: 1,
-          color: isEvil ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.7)'
+          color: isEvil ? '#e53935' : 'rgba(0,0,0,0.7)'
         }}>
           {contents[index] || `This is sample content for card ${index + 1}. Will be redefined later.`}
         </Typography>

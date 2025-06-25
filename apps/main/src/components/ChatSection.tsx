@@ -2,6 +2,7 @@ import { Container, Box, Typography, Tabs, Tab } from '@mui/material'
 import { useState } from 'react'
 import * as React from 'react'
 import { ContentSection } from './ContentSection'
+import { MarketingSection } from './MarketingSection'
 
 interface ChatSectionProps {
   isEvil: boolean
@@ -62,10 +63,13 @@ export const ChatSection = ({ isEvil }: ChatSectionProps) => {
   
   return (
   <>
-    {/* Content Section - 2nd */}
+    {/* Marketing Section - 2nd */}
+    <MarketingSection isEvil={isEvil} />
+    
+    {/* Content Section - 3rd */}
     <ContentSection isEvil={isEvil} />
     
-    {/* Chat Section - 3rd */}
+    {/* Chat Section - 4th */}
     <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Container maxWidth="xl">
         <Box sx={{ 

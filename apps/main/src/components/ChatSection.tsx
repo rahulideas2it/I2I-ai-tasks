@@ -1,7 +1,6 @@
 import { Container, Box, Typography, Tabs, Tab } from '@mui/material'
 import { useState } from 'react'
 import * as React from 'react'
-import { RightContent } from './RightContent'
 import { ContentSection } from './ContentSection'
 
 interface ChatSectionProps {

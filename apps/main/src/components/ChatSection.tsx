@@ -267,7 +267,7 @@ export const ChatSection = ({ isEvil }: ChatSectionProps) => {
                     overflow: 'hidden'
                   }}>
                     <img 
-                      src="../../assets/good.png" 
+                      src="/good.png" 
                       alt="Good Mode Dashboard" 
                       style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
                     />
@@ -366,7 +366,7 @@ export const ChatSection = ({ isEvil }: ChatSectionProps) => {
                     overflow: 'hidden'
                   }}>
                     <img 
-                      src="../../assets/evil.png" 
+                      src="/evil.png" 
                       alt="Evil Mode Dashboard" 
                       style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
                     />

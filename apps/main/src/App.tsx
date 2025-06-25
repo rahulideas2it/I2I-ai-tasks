@@ -10,7 +10,7 @@ import { MoodSwitch } from './components/ui/MoodSwitch'
 function App(): JSX.Element {
   const [isScrolled, setIsScrolled] = useState(false)
   const [displayText, setDisplayText] = useState('')
-  const [isEvil, setIsEvil] = useState(false)
+  const [isEvil, setIsEvil] = useState(true)
   const fullText = isEvil ? "Your Overqualified Replacement" : "Your Friendly Neighborhood AI"
   
   const theme = useMemo(() => createTheme({

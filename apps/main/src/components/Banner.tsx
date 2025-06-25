@@ -21,32 +21,41 @@ export const Banner = ({ isEvil, displayText, primaryColor }: BannerProps) => (
     overflow: 'hidden'
   }}>
     {/* Floating Emojis Background - Full Section Coverage */}
-    {Array.from({ length: 12 }, (_, i) => {
+    {Array.from({ length: window.innerWidth >= 1024 ? 12 : 8 }, (_, i) => {
       const goodEmojis = ['😊', '😂', '💃', '🎉', '✨', '🌈', '😍', '🥳', '🚀', '💡', '🎯', '⭐', '🌟', '💫', '🎨', '🎪', '🎆', '🎈']
       const evilEmojis = ['😈', '💀', '🩸', '🔥', '⚡', '🗡️', '🧿', '👿', '🌪️', '💥', '🌋', '⚔️', '🖤', '💣', '🌑', '🕷️', '🔮', '⚰️']
       const emojis = isEvil ? evilEmojis : goodEmojis
       const emoji = emojis[i % emojis.length]
       
-      // Better distributed patterns for visual appeal
-      const patterns = [
-        // Top corners
+      // Mobile/tablet patterns (edge placement) vs desktop patterns (original)
+      const mobilePatterns = [
+        { left: '5%', top: '10%' },
+        { left: '90%', top: '8%' },
+        { left: '2%', top: '35%' },
+        { left: '95%', top: '40%' },
+        { left: '8%', top: '85%' },
+        { left: '88%', top: '90%' },
+        { left: '3%', top: '60%' },
+        { left: '92%', top: '65%' }
+      ]
+      
+      const desktopPatterns = [
         { left: '10%', top: '15%' },
         { left: '85%', top: '12%' },
-        // Mid left and right
         { left: '5%', top: '45%' },
         { left: '90%', top: '40%' },
-        // Lower corners
         { left: '15%', top: '75%' },
         { left: '80%', top: '80%' },
-        // Center scattered
         { left: '25%', top: '25%' },
         { left: '70%', top: '30%' },
         { left: '35%', top: '65%' },
         { left: '60%', top: '70%' },
-        // Additional balance
         { left: '45%', top: '20%' },
         { left: '55%', top: '85%' }
       ]
+      
+      const isDesktop = window.innerWidth >= 1024
+      const patterns = isDesktop ? desktopPatterns : mobilePatterns
       
       const position = patterns[i]
       
@@ -77,7 +86,7 @@ export const Banner = ({ isEvil, displayText, primaryColor }: BannerProps) => (
             border: `1px solid ${isEvil ? 'rgba(229,57,53,0.2)' : 'rgba(30,136,229,0.2)'}`,
             backdropFilter: 'blur(8px)',
             opacity: 0.4,
-            zIndex: i % 5,
+            zIndex: 1,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

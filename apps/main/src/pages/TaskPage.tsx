@@ -616,7 +616,8 @@ export const TaskPage = ({ isEvil }: TaskPageProps) => {
         </Link>
         
         <Box sx={{
-          backgroundColor: isEvil ? 'rgba(0,0,0,0.85)' : 'rgba(255,255,255,0.95)',
+          color:  isEvil ? 'rgba(255,255,255,0.95)': 'rgba(0,0,0,0.9)',
+          backgroundColor: isEvil ? 'rgba(0,0,0,0.9)' : 'rgba(255,255,255,0.95)',
           borderRadius: '20px',
           p: { xs: 3, sm: 4, md: 5 },
           boxShadow: isEvil ? '0 12px 40px rgba(229,57,53,0.2)' : '0 12px 40px rgba(30,136,229,0.15)',
@@ -676,19 +677,20 @@ export const TaskPage = ({ isEvil }: TaskPageProps) => {
             '& h2': { fontSize: '1.5rem' },
             '& h3': { fontSize: '1.25rem' },
             '& p': {
-              color: isEvil ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.8)',
+              color: isEvil ? 'rgba(255,255,255,0.95)' : 'rgba(0,0,0,0.8)',
               lineHeight: 1.7,
               mb: 2,
               fontSize: '1rem'
             },
             '& ul, & ol': {
-              color: isEvil ? 'rgba(255,255,255,0.85)' : 'rgba(0,0,0,0.75)',
+              color: isEvil ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.75)',
               pl: 3,
               mb: 2
             },
             '& li': {
               mb: 0.5,
-              lineHeight: 1.6
+              lineHeight: 1.6,
+              color: isEvil ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.75)'
             },
             '& code': {
               bgcolor: isEvil ? 'rgba(229,57,53,0.1)' : 'rgba(30,136,229,0.1)',
@@ -710,6 +712,10 @@ export const TaskPage = ({ isEvil }: TaskPageProps) => {
             '& strong': {
               color: isEvil ? '#ffffff' : '#000000',
               fontWeight: '600'
+            },
+            '& em': {
+              color: isEvil ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.8)',
+              fontStyle: 'italic'
             },
             '& table': {
               width: '100%',

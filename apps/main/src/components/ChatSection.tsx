@@ -1,6 +1,7 @@
 import { Container, Box, Typography, Tabs, Tab } from '@mui/material'
 import { useState } from 'react'
 import * as React from 'react'
+import { motion } from 'framer-motion'
 import { ContentSection } from './ContentSection'
 import { MarketingSection } from './MarketingSection'
 
@@ -29,37 +30,7 @@ export const ChatSection = ({ isEvil }: ChatSectionProps) => {
     setTabValue(newValue)
   }
   
-  // Repeating scroll animation cycle
-  React.useEffect(() => {
-    const chatContainer = document.getElementById('chat-messages')
-    if (!chatContainer) return
-    
-    const scrollCycle = () => {
-      // First scroll to bottom when AI message appears
-      setTimeout(() => {
-        chatContainer.scrollTo({
-          top: chatContainer.scrollHeight,
-          behavior: 'smooth'
-        })
-      }, 5000)
-      
-      // Then scroll back to top after messages are shown
-      setTimeout(() => {
-        chatContainer.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        })
-      }, 10000)
-    }
-    
-    // Start first cycle
-    scrollCycle()
-    
-    // Repeat every 15 seconds
-    const interval = setInterval(scrollCycle, 15000)
-    
-    return () => clearInterval(interval)
-  }, [])
+
   
   return (
   <>
@@ -70,33 +41,40 @@ export const ChatSection = ({ isEvil }: ChatSectionProps) => {
     <ContentSection isEvil={isEvil} />
     
     {/* Chat Section - 4th */}
-    <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <Container maxWidth="xl">
+    {false && <Box id="chat" sx={{ 
+      minHeight: '100vh', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      py: { xs: 4, sm: 6, md: 8 },
+      background: isEvil ? 
+        'linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(229,57,53,0.03) 100%)' : 
+        'linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(30,136,229,0.03) 100%)'
+    }}>
+      <Container maxWidth="lg">
         <Box sx={{ 
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          py: { xs: 3, md: 6 },
-          px: { xs: 2, md: 4 },
-          minHeight: '70vh'
+          px: { xs: 2, sm: 3, md: 4 }
         }}>
           {/* Chat Section Full Width */}
           <Box sx={{ 
-            bgcolor: isEvil ? 'rgba(0,0,0,0.85)' : 'rgba(255,255,255,0.95)',
-            borderRadius: '24px',
-            border: `1px solid ${isEvil ? 'rgba(229,57,53,0.3)' : 'rgba(30,136,229,0.2)'}`,
+            bgcolor: isEvil ? 'rgba(0,0,0,0.9)' : 'rgba(255,255,255,0.98)',
+            borderRadius: { xs: '20px', sm: '24px' },
+            border: `2px solid ${isEvil ? 'rgba(229,57,53,0.2)' : 'rgba(30,136,229,0.15)'}`,
             boxShadow: isEvil ? 
-              '0 10px 30px rgba(229,57,53,0.15), 0 2px 8px rgba(0,0,0,0.2)' : 
-              '0 10px 30px rgba(30,136,229,0.15), 0 2px 8px rgba(0,0,0,0.1)',
-            p: { xs: 3, sm: 4 },
+              '0 20px 60px rgba(229,57,53,0.12), 0 8px 25px rgba(0,0,0,0.15)' : 
+              '0 20px 60px rgba(30,136,229,0.12), 0 8px 25px rgba(0,0,0,0.08)',
+            p: { xs: 2.5, sm: 3.5, md: 4 },
             width: '100%',
-            maxWidth: '800px',
+            maxWidth: { xs: '95vw', sm: '90vw', md: '800px' },
             height: 'auto',
-            maxHeight: { xs: '75vh', sm: '80vh' },
+            maxHeight: { xs: '85vh', sm: '80vh' },
             display: 'flex',
             flexDirection: 'column',
-            backdropFilter: 'blur(20px)',
+            backdropFilter: 'blur(25px)',
             position: 'relative',
             overflow: 'hidden',
             '&::before': {
@@ -188,7 +166,12 @@ export const ChatSection = ({ isEvil }: ChatSectionProps) => {
           {/* Client & Devs Messages */}
           <Box sx={{ mb: 4 }}>
             {/* Client Message */}
-            <Box sx={{ mb: 3, display: 'flex', justifyContent: 'flex-start', animation: 'slideInLeft 0.8s ease-out 1s both' }}>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'flex-start' }}
+            >
               <Box sx={{ 
                 bgcolor: 'grey.50',
                 p: { xs: 1.5, sm: 2 }, 
@@ -204,10 +187,15 @@ export const ChatSection = ({ isEvil }: ChatSectionProps) => {
                   🧑‍💼 We need a monorepo setup with reusable UI components, along with an application that explores and presents both the bright and dark sides of AI.
                 </Typography>
               </Box>
-            </Box>
+            </motion.div>
             
             {/* Devs Message */}
-            <Box sx={{ mb: 4, display: 'flex', justifyContent: 'flex-start', animation: 'slideInLeft 0.8s ease-out 3s both' }}>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 1 }}
+              style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'flex-start' }}
+            >
               <Box sx={{ 
                 bgcolor: 'grey.50',
                 p: { xs: 1.5, sm: 2 }, 
@@ -223,7 +211,7 @@ export const ChatSection = ({ isEvil }: ChatSectionProps) => {
                   👨‍💻 Uh... that'll take a while. We need to set up the architecture, link packages, download assets, manage themes... you know the drill.
                 </Typography>
               </Box>
-            </Box>
+            </motion.div>
           </Box>
           
           {/* AI Messages */}
@@ -475,7 +463,7 @@ export const ChatSection = ({ isEvil }: ChatSectionProps) => {
           
         </Box>
       </Container>
-    </Box>
+    </Box>}
     
     {/* Hidden - AI Prompts Section */}
     {false && <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', py: 4 }}>

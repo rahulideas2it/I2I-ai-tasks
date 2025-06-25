@@ -1,5 +1,5 @@
 import { Container, AppBar, Toolbar, Box, createTheme, ThemeProvider } from '@mui/material'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AILogo } from './components/AILogo'
 import { HomePage } from './pages/HomePage'
@@ -8,23 +8,23 @@ import { DemoPage } from './pages/DemoPage'
 import { MoodSwitch } from './components/ui/MoodSwitch'
 
 function App(): JSX.Element {
-  const [isScrolled, setIsScrolled] = useState(true)
+  const [isScrolled, setIsScrolled] = useState(false)
   const [displayText, setDisplayText] = useState('')
   const [isEvil, setIsEvil] = useState(false)
   const fullText = isEvil ? "Your Overqualified Replacement" : "Your Friendly Neighborhood AI"
   
-  const theme = createTheme({
+  const theme = useMemo(() => createTheme({
     palette: {
       mode: isEvil ? 'dark' : 'light',
       primary: {
         main: isEvil ? '#d32f2f' : '#1976d2',
       },
     },
-  })
+  }), [isEvil])
   
-  const toggleMood = () => {
+  const toggleMood = useCallback(() => {
     setIsEvil(!isEvil)
-  }
+  }, [isEvil])
   
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +33,27 @@ function App(): JSX.Element {
     
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+  
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash
+      if (hash) {
+        setTimeout(() => {
+          const element = document.querySelector(hash)
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' })
+          }
+        }, 100)
+      }
+    }
+    
+    // Scroll on initial load
+    scrollToHash()
+    
+    // Listen for hash changes
+    window.addEventListener('hashchange', scrollToHash)
+    return () => window.removeEventListener('hashchange', scrollToHash)
   }, [])
   
   useEffect(() => {
@@ -48,7 +69,7 @@ function App(): JSX.Element {
     }, 100)
     
     return () => clearInterval(timer)
-  }, [isEvil])
+  }, [fullText])
   
 
 
@@ -65,15 +86,17 @@ function App(): JSX.Element {
                   <AppBar 
                     position="fixed" 
                     sx={{ 
-                      bgcolor: isEvil ? 'rgba(18, 18, 18, 0.8)' : 'rgba(255, 255, 255, 0.8)',
-                      backdropFilter: 'blur(10px)',
-                      borderBottom: 1,
-                      borderColor: 'divider',
-                      boxShadow: 'none'
+                      bgcolor: isEvil ? 'rgba(0, 0, 0, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                      backdropFilter: 'blur(20px)',
+                      borderBottom: `2px solid ${isEvil ? 'rgba(229,57,53,0.2)' : 'rgba(30,136,229,0.15)'}`,
+                      boxShadow: isEvil ? 
+                        '0 4px 20px rgba(229,57,53,0.1)' : 
+                        '0 4px 20px rgba(30,136,229,0.1)',
+                      zIndex: 1100
                     }}
                   >
                     <Container maxWidth="xl">
-                      <Toolbar>
+                      <Toolbar sx={{ py: { xs: 0.5, sm: 1 } }}>
                         <Box sx={{ flexGrow: 1 }}>
                           <AILogo isEvil={isEvil} primaryColor={theme.palette.primary.main} />
                         </Box>
@@ -85,8 +108,11 @@ function App(): JSX.Element {
                 
                 {/* Main Navbar */}
                 <Container maxWidth="xl">
-                  <AppBar position="static" elevation={0} sx={{ bgcolor: 'transparent', py: 1 }}>
-                    <Toolbar sx={{ px: 0 }}>
+                  <AppBar position="static" elevation={0} sx={{ 
+                    bgcolor: 'transparent', 
+                    py: { xs: 1, sm: 1.5, md: 2 }
+                  }}>
+                    <Toolbar sx={{ px: { xs: 1, sm: 2 } }}>
                       <Box sx={{ flexGrow: 1 }}>
                         <AILogo isEvil={isEvil} primaryColor={theme.palette.primary.main} />
                       </Box>

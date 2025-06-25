@@ -1,11 +1,13 @@
 import { Container, Box, Typography } from '@mui/material'
 import * as React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 interface ContentSectionProps {
   isEvil: boolean
 }
 
 const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
+  const navigate = useNavigate()
   
   const handleCardClick = () => {
     const routes = [
@@ -21,7 +23,7 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
       '/task/react-optimization'
     ]
     if (routes[index]) {
-      window.open(routes[index], '_blank')
+      navigate(routes[index])
     }
   }
 
@@ -121,24 +123,30 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
     <Box 
       onClick={handleCardClick}
       sx={{
-        bgcolor: 'background.paper',
-        borderRadius: '16px',
-        border: '1px solid',
-        borderColor: 'divider',
+        bgcolor: isEvil ? 'rgba(0,0,0,0.9)' : 'rgba(255,255,255,0.95)',
+        borderRadius: { xs: '12px', sm: '16px' },
+        border: `2px solid ${isEvil ? 'rgba(229,57,53,0.2)' : 'rgba(30,136,229,0.15)'}`,
         overflow: 'hidden',
-        transition: 'all 0.3s ease',
+        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         cursor: index <= 9 ? 'pointer' : 'default',
-        height: '380px',
+        height: { xs: '360px', sm: '380px', md: '400px' },
         display: 'flex',
         flexDirection: 'column',
+        backdropFilter: 'blur(10px)',
+        boxShadow: isEvil ? 
+          '0 4px 20px rgba(229,57,53,0.1), 0 2px 8px rgba(0,0,0,0.1)' : 
+          '0 4px 20px rgba(30,136,229,0.1), 0 2px 8px rgba(0,0,0,0.05)',
         '&:hover': {
-          transform: 'translateY(-4px)',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.12)'
+          transform: 'translateY(-8px) scale(1.02)',
+          boxShadow: isEvil ? 
+            '0 12px 40px rgba(229,57,53,0.2), 0 4px 16px rgba(0,0,0,0.15)' : 
+            '0 12px 40px rgba(30,136,229,0.2), 0 4px 16px rgba(0,0,0,0.1)',
+          borderColor: isEvil ? 'rgba(229,57,53,0.4)' : 'rgba(30,136,229,0.3)'
         }
       }}>
       <Box sx={{
         width: '100%',
-        height: '160px',
+        height: { xs: '140px', sm: '160px' },
         background: gradients[2] || gradients[0],
         display: 'flex',
         alignItems: 'center',
@@ -197,17 +205,20 @@ const SampleCard = ({ index, isEvil }: { index: number, isEvil: boolean }) => {
           </Typography>
         </Box>
       </Box>
-      <Box sx={{ p: 2, flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ p: { xs: 1.5, sm: 2 }, flex: 1, display: 'flex', flexDirection: 'column' }}>
         <Typography variant="h6" sx={{ 
-          mb: 1,
-          color: isEvil ? '#ffffff' : 'text.primary'
+          mb: { xs: 1, sm: 1.5 },
+          fontSize: { xs: '1rem', sm: '1.1rem' },
+          fontWeight: 600,
+          color: isEvil ? 'rgba(255,255,255,0.95)' : 'rgba(0,0,0,0.9)'
         }}>
           {headers[index] || `Sample Card ${index + 1}`}
         </Typography>
         <Typography variant="body2" sx={{ 
-          lineHeight: 1.4,
+          lineHeight: { xs: 1.4, sm: 1.5 },
+          fontSize: { xs: '0.85rem', sm: '0.9rem' },
           flex: 1,
-          color: isEvil ? '#c62828' : 'text.secondary'
+          color: isEvil ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.7)'
         }}>
           {contents[index] || `This is sample content for card ${index + 1}. Will be redefined later.`}
         </Typography>
@@ -229,53 +240,7 @@ export const ContentSection = ({ isEvil }: ContentSectionProps) => {
   // Reference for the scrolling container
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   
-  // Auto-scroll animation
-  React.useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
-    if (!scrollContainer) return;
-    
-    let animationId: number;
-    let scrollPosition = 0;
-    const cardWidth = 260 + 24; // card width + gap
-    const totalWidth = cardWidth * 10; // 10 cards
-    
-    const scroll = () => {
-      // Increment scroll position (adjust speed here)
-      scrollPosition += 0.5;
-      
-      // Reset when we've scrolled through all cards
-      if (scrollPosition >= totalWidth) {
-        // Smooth reset to beginning
-        scrollPosition = 0;
-        scrollContainer.scrollTo({ left: 0, behavior: 'auto' });
-      }
-      
-      // Apply the scroll position
-      scrollContainer.scrollLeft = scrollPosition;
-      
-      // Continue animation
-      animationId = requestAnimationFrame(scroll);
-    };
-    
-    // Start animation
-    animationId = requestAnimationFrame(scroll);
-    
-    // Pause animation when hovering
-    const handleMouseEnter = () => cancelAnimationFrame(animationId);
-    const handleMouseLeave = () => {
-      animationId = requestAnimationFrame(scroll);
-    };
-    
-    scrollContainer.addEventListener('mouseenter', handleMouseEnter);
-    scrollContainer.addEventListener('mouseleave', handleMouseLeave);
-    
-    // Clean up
-    return () => {
-      cancelAnimationFrame(animationId);
-      scrollContainer.removeEventListener('mouseenter', handleMouseEnter);
-      scrollContainer.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
+
   
   return (
     <Box id="content" sx={{ 
@@ -284,27 +249,37 @@ export const ContentSection = ({ isEvil }: ContentSectionProps) => {
       flexDirection: 'column',
       alignItems: 'center', 
       justifyContent: 'center',
-      py: 4
+      py: { xs: 6, sm: 8, md: 10 },
+      background: isEvil ? 
+        'linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(229,57,53,0.02) 100%)' : 
+        'linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(30,136,229,0.02) 100%)'
     }}>
       <Typography 
-        variant="h3" 
+        variant="h2" 
         sx={{ 
-          mb: 6, 
-          px: 3,
-          fontWeight: '600',
+          mb: { xs: 4, sm: 6, md: 8 }, 
+          px: { xs: 2, sm: 3 },
+          fontWeight: '700',
+          fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
           color: isEvil ? '#e53935' : '#1e88e5',
           textAlign: 'center',
           fontFamily: 'Inter, system-ui, sans-serif',
-          letterSpacing: '-0.02em'
+          letterSpacing: '-0.02em',
+          background: isEvil ? 
+            'linear-gradient(135deg, #e53935, #ff5252)' : 
+            'linear-gradient(135deg, #1e88e5, #64b5f6)',
+          backgroundClip: 'text',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent'
         }}
       >
         {isEvil ? 'Witness the end of legacy' : 'Bright future, Clean code'}
       </Typography>
-      <Container maxWidth="lg" sx={{ 
+      <Container maxWidth="xl" sx={{ 
         display: 'flex', 
         alignItems: 'center',
         justifyContent: 'center',
-        px: 2
+        px: { xs: 1, sm: 2, md: 3 }
       }}>
         <Box 
           ref={scrollContainerRef}
@@ -312,28 +287,31 @@ export const ContentSection = ({ isEvil }: ContentSectionProps) => {
           overflowX: 'auto',
           overflowY: 'hidden',
           display: 'flex',
-          gap: 3,
-          py: 2,
-          px: 1,
+          gap: { xs: 2, sm: 3 },
+          py: { xs: 2, sm: 3 },
+          px: { xs: 1, sm: 2 },
           width: '100%',
           scrollSnapType: 'x mandatory',
           scrollBehavior: 'smooth',
           '&::-webkit-scrollbar': {
-            height: '8px'
+            height: { xs: '6px', sm: '8px' }
           },
           '&::-webkit-scrollbar-track': {
-            background: 'rgba(0,0,0,0.1)',
+            background: 'rgba(0,0,0,0.05)',
             borderRadius: '4px'
           },
           '&::-webkit-scrollbar-thumb': {
-            background: isEvil ? 'rgba(211,47,47,0.5)' : 'rgba(25,118,210,0.5)',
-            borderRadius: '4px'
+            background: isEvil ? 'rgba(229,57,53,0.4)' : 'rgba(30,136,229,0.4)',
+            borderRadius: '4px',
+            '&:hover': {
+              background: isEvil ? 'rgba(229,57,53,0.6)' : 'rgba(30,136,229,0.6)'
+            }
           }
         }}>
           {Array.from({ length: 10 }, (_, index) => (
             <Box key={index} sx={{ 
-              width: '260px', 
-              maxWidth: '260px', 
+              width: { xs: '240px', sm: '260px', md: '280px' }, 
+              maxWidth: { xs: '240px', sm: '260px', md: '280px' }, 
               flexShrink: 0,
               scrollSnapAlign: 'start'
             }}>

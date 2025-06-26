@@ -1,4 +1,4 @@
-package com.ntst.uiaudit;
+package com.example.uiaudit;
 
 import android.content.Context;
 import android.database.ContentObserver;
@@ -8,8 +8,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
-
-import java.util.concurrent.atomic.AtomicLong;
 
 public class ScreenshotObserver {
     public interface ScreenshotListener {
@@ -78,7 +76,7 @@ public class ScreenshotObserver {
                 }
             }
         } catch (Exception e) {
-            Log.e("ScreenshotObserver", "Error checking screenshot", e);
+            Log.e("ScreenshotObserver", "Error checking for screenshot", e);
         }
     }
 }
